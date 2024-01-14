@@ -2,7 +2,7 @@
 ---
 name: know
 version: 0.0.1
-description: The Know Framework for Dart.
+description: The Know Framework for Dart
 homepage: https://know.dev
 repository: https://github.com/HaltiaAI/know.dart
 issue_tracker: https://github.com/HaltiaAI/know.dart/issues
