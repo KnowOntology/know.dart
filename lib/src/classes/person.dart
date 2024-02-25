@@ -29,7 +29,23 @@ sealed class Person extends Thing {
 
   Person._();
 
-  factory Person() = _Person;
+  factory Person({
+    String? id,
+    Name? name,
+    List<Name> nicknames,
+    Event? birth,
+    Event? death,
+    Person? father,
+    Person? mother,
+    List<Person> siblings,
+    List<Person> spouses,
+    List<Person> partners,
+    List<Person> children,
+    List<Person> colleagues,
+    List<Person> knows,
+    List<Email> emails,
+    List<Phone> phones,
+  }) = _Person.make;
 
   factory Person.fromJson(final Map<String, dynamic> json) = _Person.fromJson;
 
@@ -131,7 +147,7 @@ final class _Person extends Person {
   @override
   List<Phone> phones;
 
-  _Person._({
+  _Person.make({
     this.id,
     this.name,
     this.nicknames = const [],
@@ -150,10 +166,10 @@ final class _Person extends Person {
     this.phones = const [],
   }) : super._();
 
-  factory _Person() => _Person._();
+  factory _Person() => _Person.make();
 
   factory _Person.fromJson(final Map<String, dynamic> json) {
-    return _Person._(
+    return _Person.make(
       id: json["id"],
       name: json["name"],
       nicknames: json["nicknames"],

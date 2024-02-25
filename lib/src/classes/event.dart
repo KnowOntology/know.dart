@@ -4,11 +4,15 @@ import '../prelude.dart';
 import 'thing.dart' show Thing;
 
 sealed class Event extends Thing {
-  String? get date;
+  Date? get date;
 
   Event._();
 
-  factory Event() = _Event;
+  factory Event({
+    String? id,
+    Name? name,
+    Date? date,
+  }) = _Event.make;
 
   factory Event.fromJson(final Map<String, dynamic> json) = _Event.fromJson;
 
@@ -16,7 +20,7 @@ sealed class Event extends Thing {
   Map<String, dynamic> toJson() {
     final result = super.toJson();
     result.addAll({
-      "date": date,
+      "date": date.toString(),
     });
     return result;
   }
@@ -30,18 +34,18 @@ final class _Event extends Event {
   Name? name;
 
   @override
-  String? date;
+  Date? date;
 
-  _Event._({
+  _Event.make({
     this.id,
     this.name,
-    this.date, // ignore: unused_element
+    this.date,
   }) : super._();
 
-  factory _Event() => _Event._();
+  factory _Event() => _Event.make();
 
   factory _Event.fromJson(final Map<String, dynamic> json) {
-    return _Event._(
+    return _Event.make(
       id: json["id"],
       name: json["name"],
       date: json["date"],
