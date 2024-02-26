@@ -27,6 +27,7 @@ sealed class Person extends Thing {
   Set<Email> get emails;
   Phone? get phone;
   Set<Phone> get phones;
+  Set<String> get notes;
 
   Person._() : super.init();
 
@@ -46,6 +47,7 @@ sealed class Person extends Thing {
     Set<Relation<Person>> knows,
     Set<Email> emails,
     Set<Phone> phones,
+    Set<String> notes,
   }) = _Person.of;
 
   factory Person.fromJson(final Map<String, dynamic> json) = _Person.fromJson;
@@ -66,7 +68,8 @@ sealed class Person extends Thing {
         colleagues,
         knows,
         emails,
-        phones);
+        phones,
+        notes);
   }
 
   @override
@@ -86,7 +89,8 @@ sealed class Person extends Thing {
         colleagues == other.colleagues &&
         knows == other.knows &&
         emails == other.emails &&
-        phones == other.phones;
+        phones == other.phones &&
+        notes == other.notes;
   }
 
   @override
@@ -113,6 +117,7 @@ sealed class Person extends Thing {
       "knows": knows,
       "emails": emails,
       "phones": phones,
+      "notes": notes,
     });
     return result;
   }
@@ -188,6 +193,9 @@ final class _Person extends Person {
   @override
   Set<Phone> phones;
 
+  @override
+  Set<String> notes;
+
   _Person.of({
     this.id,
     this.name,
@@ -204,6 +212,7 @@ final class _Person extends Person {
     this.knows = const {},
     this.emails = const {},
     this.phones = const {},
+    this.notes = const {}
   }) : super._();
 
   factory _Person() => _Person.of();
