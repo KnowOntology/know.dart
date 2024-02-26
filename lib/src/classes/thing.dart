@@ -1,13 +1,14 @@
 // This is free and unencumbered software released into the public domain.
 
 import '../prelude.dart';
+import 'package:meta/meta.dart' show protected;
 
 abstract base class Thing {
   String? get id;
 
   Name? get name;
 
-  Thing.init();
+  @protected Thing.init();
 
   factory Thing({
     String? id,
