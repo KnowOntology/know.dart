@@ -7,45 +7,45 @@ import 'thing.dart' show Thing;
 
 sealed class Person extends Thing {
   Name? get nickname;
-  List<Name> get nicknames;
+  Set<Name> get nicknames;
   Age? get age;
   Date? get birthdate;
   Event? get birth;
   Event? get death;
-  List<Person> get parents;
+  Set<Person> get parents;
   Person? get father;
   Person? get mother;
-  List<Relation<Person>> get siblings;
+  Set<Relation<Person>> get siblings;
   Person? get spouse;
-  List<Relation<Person>> get spouses;
+  Set<Relation<Person>> get spouses;
   Person? get partner;
-  List<Relation<Person>> get partners;
-  List<Relation<Person>> get children;
-  List<Relation<Person>> get colleagues;
-  List<Relation<Person>> get knows;
+  Set<Relation<Person>> get partners;
+  Set<Relation<Person>> get children;
+  Set<Relation<Person>> get colleagues;
+  Set<Relation<Person>> get knows;
   Email? get email;
-  List<Email> get emails;
+  Set<Email> get emails;
   Phone? get phone;
-  List<Phone> get phones;
+  Set<Phone> get phones;
 
   Person._() : super.init();
 
   factory Person({
     String? id,
     Name? name,
-    List<Name> nicknames,
+    Set<Name> nicknames,
     Event? birth,
     Event? death,
     Person? father,
     Person? mother,
-    List<Relation<Person>> siblings,
-    List<Relation<Person>> spouses,
-    List<Relation<Person>> partners,
-    List<Relation<Person>> children,
-    List<Relation<Person>> colleagues,
-    List<Relation<Person>> knows,
-    List<Email> emails,
-    List<Phone> phones,
+    Set<Relation<Person>> siblings,
+    Set<Relation<Person>> spouses,
+    Set<Relation<Person>> partners,
+    Set<Relation<Person>> children,
+    Set<Relation<Person>> colleagues,
+    Set<Relation<Person>> knows,
+    Set<Email> emails,
+    Set<Phone> phones,
   }) = _Person.of;
 
   factory Person.fromJson(final Map<String, dynamic> json) = _Person.fromJson;
@@ -129,7 +129,7 @@ final class _Person extends Person {
   Name? get nickname => nicknames.firstOrNull;
 
   @override
-  List<Name> nicknames;
+  Set<Name> nicknames;
 
   @override
   Age? get age => null; // TODO: calculate from this.birthdate
@@ -144,7 +144,7 @@ final class _Person extends Person {
   Event? death;
 
   @override
-  List<Person> get parents => [father, mother].whereType<Person>().toList();
+  Set<Person> get parents => {father, mother}.whereType<Person>().toSet();
 
   @override
   Person? father;
@@ -153,57 +153,57 @@ final class _Person extends Person {
   Person? mother;
 
   @override
-  List<Relation<Person>> siblings;
+  Set<Relation<Person>> siblings;
 
   @override
   Person? get spouse => spouses.firstOrNull?.object;
 
   @override
-  List<Relation<Person>> spouses;
+  Set<Relation<Person>> spouses;
 
   @override
   Person? get partner => partners.firstOrNull?.object;
 
   @override
-  List<Relation<Person>> partners;
+  Set<Relation<Person>> partners;
 
   @override
-  List<Relation<Person>> children;
+  Set<Relation<Person>> children;
 
   @override
-  List<Relation<Person>> colleagues;
+  Set<Relation<Person>> colleagues;
 
   @override
-  List<Relation<Person>> knows;
+  Set<Relation<Person>> knows;
 
   @override
   Email? get email => emails.firstOrNull;
 
   @override
-  List<Email> emails;
+  Set<Email> emails;
 
   @override
   Phone? get phone => phones.firstOrNull;
 
   @override
-  List<Phone> phones;
+  Set<Phone> phones;
 
   _Person.of({
     this.id,
     this.name,
-    this.nicknames = const [],
+    this.nicknames = const {},
     this.birth,
     this.death,
     this.father,
     this.mother,
-    this.siblings = const [],
-    this.spouses = const [],
-    this.partners = const [],
-    this.children = const [],
-    this.colleagues = const [],
-    this.knows = const [],
-    this.emails = const [],
-    this.phones = const [],
+    this.siblings = const {},
+    this.spouses = const {},
+    this.partners = const {},
+    this.children = const {},
+    this.colleagues = const {},
+    this.knows = const {},
+    this.emails = const {},
+    this.phones = const {},
   }) : super._();
 
   factory _Person() => _Person.of();
