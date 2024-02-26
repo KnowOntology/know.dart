@@ -4,6 +4,8 @@
 library know;
 
 export 'src/prelude.dart';
+export 'src/relation.dart' show Relation;
+
 export 'src/classes/thing.dart' show Thing;
 export 'src/classes/event.dart' show Event;
 export 'src/classes/person.dart' show Person;

@@ -6,4 +6,5 @@ void main() {
   print("Hello, world!");
   print(Event());
   print(Person(name: "J. Random Hacker"));
+  print(Relation(Person(), #knows, Person()));
 }

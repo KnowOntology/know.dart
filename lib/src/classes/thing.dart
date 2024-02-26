@@ -8,7 +8,8 @@ abstract base class Thing {
 
   Name? get name;
 
-  @protected Thing.init();
+  @protected
+  Thing.init();
 
   factory Thing({
     String? id,

@@ -1,6 +1,7 @@
 // This is free and unencumbered software released into the public domain.
 
 import '../prelude.dart';
+import '../relation.dart' show Relation;
 import 'event.dart' show Event;
 import 'thing.dart' show Thing;
 
@@ -14,14 +15,14 @@ sealed class Person extends Thing {
   List<Person> get parents;
   Person? get father;
   Person? get mother;
-  List<Person> get siblings;
+  List<Relation<Person>> get siblings;
   Person? get spouse;
-  List<Person> get spouses;
+  List<Relation<Person>> get spouses;
   Person? get partner;
-  List<Person> get partners;
-  List<Person> get children;
-  List<Person> get colleagues;
-  List<Person> get knows;
+  List<Relation<Person>> get partners;
+  List<Relation<Person>> get children;
+  List<Relation<Person>> get colleagues;
+  List<Relation<Person>> get knows;
   Email? get email;
   List<Email> get emails;
   Phone? get phone;
@@ -37,12 +38,12 @@ sealed class Person extends Thing {
     Event? death,
     Person? father,
     Person? mother,
-    List<Person> siblings,
-    List<Person> spouses,
-    List<Person> partners,
-    List<Person> children,
-    List<Person> colleagues,
-    List<Person> knows,
+    List<Relation<Person>> siblings,
+    List<Relation<Person>> spouses,
+    List<Relation<Person>> partners,
+    List<Relation<Person>> children,
+    List<Relation<Person>> colleagues,
+    List<Relation<Person>> knows,
     List<Email> emails,
     List<Phone> phones,
   }) = _Person.of;
@@ -152,28 +153,28 @@ final class _Person extends Person {
   Person? mother;
 
   @override
-  List<Person> siblings;
+  List<Relation<Person>> siblings;
 
   @override
-  Person? get spouse => spouses.firstOrNull;
+  Person? get spouse => spouses.firstOrNull?.object;
 
   @override
-  List<Person> spouses;
+  List<Relation<Person>> spouses;
 
   @override
-  Person? get partner => partners.firstOrNull;
+  Person? get partner => partners.firstOrNull?.object;
 
   @override
-  List<Person> partners;
+  List<Relation<Person>> partners;
 
   @override
-  List<Person> children;
+  List<Relation<Person>> children;
 
   @override
-  List<Person> colleagues;
+  List<Relation<Person>> colleagues;
 
   @override
-  List<Person> knows;
+  List<Relation<Person>> knows;
 
   @override
   Email? get email => emails.firstOrNull;
@@ -191,7 +192,6 @@ final class _Person extends Person {
     this.id,
     this.name,
     this.nicknames = const [],
-    //this.age,
     this.birth,
     this.death,
     this.father,
