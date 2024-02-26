@@ -27,7 +27,7 @@ sealed class Person extends Thing {
   Phone? get phone;
   List<Phone> get phones;
 
-  Person._();
+  Person._() : super.init();
 
   factory Person({
     String? id,
@@ -45,21 +45,63 @@ sealed class Person extends Thing {
     List<Person> knows,
     List<Email> emails,
     List<Phone> phones,
-  }) = _Person.make;
+  }) = _Person.of;
 
   factory Person.fromJson(final Map<String, dynamic> json) = _Person.fromJson;
+
+  @override
+  int get hashCode {
+    return Object.hash(
+        super.hashCode,
+        nicknames,
+        birth,
+        death,
+        father,
+        mother,
+        siblings,
+        spouses,
+        partners,
+        children,
+        colleagues,
+        knows,
+        emails,
+        phones);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! Person) return false;
+    return super == other &&
+        nicknames == other.nicknames &&
+        birth == other.birth &&
+        death == other.death &&
+        father == other.father &&
+        mother == other.mother &&
+        siblings == other.siblings &&
+        spouses == other.spouses &&
+        partners == other.partners &&
+        children == other.children &&
+        colleagues == other.colleagues &&
+        knows == other.knows &&
+        emails == other.emails &&
+        phones == other.phones;
+  }
+
+  @override
+  String toString() {
+    final json = toJson().toString();
+    final inner = json.substring(1, json.length - 1);
+    return "Person($inner)";
+  }
 
   @override
   Map<String, dynamic> toJson() {
     final result = super.toJson();
     result.addAll({
-      //"nickname": nickname,
       "nicknames": nicknames,
-      //"age": age,
-      //"birthdate": birthdate,
       "birth": birth,
       "death": death,
-      //"parents": parents,
       "father": father,
       "mother": mother,
       "siblings": siblings,
@@ -68,9 +110,7 @@ sealed class Person extends Thing {
       "children": children,
       "colleagues": colleagues,
       "knows": knows,
-      // "email": email,
       "emails": emails,
-      // "phone": phone,
       "phones": phones,
     });
     return result;
@@ -147,7 +187,7 @@ final class _Person extends Person {
   @override
   List<Phone> phones;
 
-  _Person.make({
+  _Person.of({
     this.id,
     this.name,
     this.nicknames = const [],
@@ -166,9 +206,10 @@ final class _Person extends Person {
     this.phones = const [],
   }) : super._();
 
-  factory _Person() => _Person.make();
+  factory _Person() => _Person.of();
 
   factory _Person.fromJson(final Map<String, dynamic> json) {
-    return Function.apply(_Person.make, [], json.map((k, v) => MapEntry(Symbol(k), v)));
+    return Function.apply(
+        _Person.of, [], json.map((k, v) => MapEntry(Symbol(k), v)));
   }
 }

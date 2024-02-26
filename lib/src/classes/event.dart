@@ -8,16 +8,35 @@ sealed class Event extends Thing {
 
   Date? get end;
 
-  Event._();
+  Event._() : super.init();
 
   factory Event({
     String? id,
     Name? name,
     Date? start,
     Date? end,
-  }) = _Event.make;
+  }) = _Event.of;
 
   factory Event.fromJson(final Map<String, dynamic> json) = _Event.fromJson;
+
+  @override
+  int get hashCode {
+    return Object.hash(super.hashCode, start, end);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! Event) return false;
+    return super == other && start == other.start && end == other.end;
+  }
+
+  @override
+  String toString() {
+    final json = toJson().toString();
+    final inner = json.substring(1, json.length - 1);
+    return "Event($inner)";
+  }
 
   @override
   Map<String, dynamic> toJson() {
@@ -43,16 +62,17 @@ final class _Event extends Event {
   @override
   Date? end;
 
-  _Event.make({
+  _Event.of({
     this.id,
     this.name,
     this.start,
     this.end,
   }) : super._();
 
-  factory _Event() => _Event.make();
+  factory _Event() => _Event.of();
 
   factory _Event.fromJson(final Map<String, dynamic> json) {
-    return Function.apply(_Event.make, [], json.map((k, v) => MapEntry(Symbol(k), v)));
+    return Function.apply(
+        _Event.of, [], json.map((k, v) => MapEntry(Symbol(k), v)));
   }
 }

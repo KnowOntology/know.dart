@@ -7,12 +7,33 @@ abstract base class Thing {
 
   Name? get name;
 
-  Thing();
+  Thing.init();
+
+  factory Thing({
+    String? id,
+    Name? name,
+  }) = _Thing.of;
 
   factory Thing.fromJson(final Map<String, dynamic> json) = _Thing.fromJson;
 
   @override
-  String toString() => toJson().toString();
+  int get hashCode {
+    return Object.hash(id, name);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! Thing) return false;
+    return id == other.id && name == other.name;
+  }
+
+  @override
+  String toString() {
+    final json = toJson().toString();
+    final inner = json.substring(1, json.length - 1);
+    return "Thing($inner)";
+  }
 
   Map<String, dynamic> toJson() => {
         "id": id,
@@ -27,17 +48,15 @@ final class _Thing extends Thing {
   @override
   Name? name;
 
-  _Thing._({
-    this.id, // ignore: unused_element
-    this.name, // ignore: unused_element
-  });
+  _Thing.of({
+    this.id,
+    this.name,
+  }) : super.init();
 
-  factory _Thing() => _Thing._();
+  factory _Thing() => _Thing.of();
 
   factory _Thing.fromJson(final Map<String, dynamic> json) {
-    return _Thing._(
-      id: json["id"],
-      name: json["name"],
-    );
+    return Function.apply(
+        _Thing.of, [], json.map((k, v) => MapEntry(Symbol(k), v)));
   }
 }
