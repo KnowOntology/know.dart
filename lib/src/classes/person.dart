@@ -94,7 +94,7 @@ final class _Person extends Person {
   Age? get age => null; // TODO: calculate from this.birthdate
 
   @override
-  Date? get birthdate => birth?.date;
+  Date? get birthdate => birth?.start;
 
   @override
   Event? birth;
@@ -169,22 +169,6 @@ final class _Person extends Person {
   factory _Person() => _Person.make();
 
   factory _Person.fromJson(final Map<String, dynamic> json) {
-    return _Person.make(
-      id: json["id"],
-      name: json["name"],
-      nicknames: json["nicknames"],
-      birth: json["birth"],
-      death: json["death"],
-      father: json["father"],
-      mother: json["mother"],
-      siblings: json["siblings"],
-      spouses: json["spouses"],
-      partners: json["partners"],
-      children: json["children"],
-      colleagues: json["colleagues"],
-      knows: json["knows"],
-      emails: json["emails"],
-      phones: json["phones"],
-    );
+    return Function.apply(_Person.make, [], json.map((k, v) => MapEntry(Symbol(k), v)));
   }
 }
