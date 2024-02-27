@@ -6,6 +6,8 @@ import 'event.dart' show Event;
 import 'thing.dart' show Thing;
 
 sealed class Person extends Thing {
+  String? get honorific;
+
   Name? get alias;
   Set<Name> get aliases;
 
@@ -60,6 +62,7 @@ sealed class Person extends Thing {
   factory Person({
     String? id,
     Name? name,
+    String? honorific,
     Set<Name> aliases,
     Sex? sex,
     Event? birth,
@@ -84,6 +87,7 @@ sealed class Person extends Thing {
   int get hashCode {
     return Object.hash(
         super.hashCode,
+        honorific,
         aliases,
         sex,
         birth,
@@ -107,6 +111,7 @@ sealed class Person extends Thing {
     if (identical(this, other)) return true;
     if (other is! Person) return false;
     return super == other &&
+        honorific == other.honorific &&
         aliases == other.aliases &&
         sex == other.sex &&
         birth == other.birth &&
@@ -136,6 +141,7 @@ sealed class Person extends Thing {
   Map<String, dynamic> toJson() {
     final result = super.toJson();
     result.addAll({
+      "honorific": honorific,
       "aliases": aliases,
       "sex": sex,
       "birth": birth,
@@ -163,6 +169,9 @@ final class _Person extends Person {
 
   @override
   Name? name;
+
+  @override
+  String? honorific;
 
   @override
   Name? get alias => aliases.firstOrNull;
@@ -242,6 +251,7 @@ final class _Person extends Person {
   _Person.of({
     this.id,
     this.name,
+    this.honorific,
     this.aliases = const {},
     this.sex,
     this.birth,
