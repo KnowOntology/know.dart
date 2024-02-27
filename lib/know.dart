@@ -4,6 +4,7 @@
 library know;
 
 export 'src/prelude.dart';
+export 'src/language.dart' show LanguageTag;
 export 'src/relation.dart' show Relation;
 
 export 'src/classes/thing.dart' show Thing;

@@ -1,6 +1,7 @@
 // This is free and unencumbered software released into the public domain.
 
 import '../prelude.dart';
+import '../language.dart' show LanguageTag;
 import '../relation.dart' show Relation;
 import 'event.dart' show Event;
 import 'thing.dart' show Thing;
@@ -52,7 +53,9 @@ sealed class Person extends Thing {
 
   Set<Relation<Person>> get knows;
 
-  Set<LangTag> get speaks;
+  bool? get speaksEnglish =>
+      speaks.isNotEmpty ? speaks.contains(LanguageTag.en) : null;
+  Set<LanguageTag> get speaks;
 
   CountryCode? get nationality;
   Set<CountryCode> get nationalities;
@@ -86,7 +89,7 @@ sealed class Person extends Thing {
     Set<Relation<Person>> children,
     Set<Relation<Person>> colleagues,
     Set<Relation<Person>> knows,
-    Set<LangTag> speaks,
+    Set<LanguageTag> speaks,
     Set<CountryCode> nationalities,
     Set<Email> emails,
     Set<Phone> phones,
@@ -247,7 +250,7 @@ final class _Person extends Person {
   Set<Relation<Person>> knows;
 
   @override
-  Set<LangTag> speaks;
+  Set<LanguageTag> speaks;
 
   @override
   CountryCode? get nationality => nationalities.firstOrNull;
@@ -276,29 +279,29 @@ final class _Person extends Person {
   @override
   Set<String> notes;
 
-  _Person.of({
-    this.id,
-    this.name,
-    this.honorific,
-    this.aliases = const {},
-    this.sex,
-    this.birth,
-    this.death,
-    this.father,
-    this.mother,
-    this.siblings = const {},
-    this.spouses = const {},
-    this.partners = const {},
-    this.children = const {},
-    this.colleagues = const {},
-    this.knows = const {},
-    this.speaks = const {},
-    this.nationalities = const {},
-    this.emails = const {},
-    this.phones = const {},
-    this.links = const {},
-    this.notes = const {}
-  }) : super._();
+  _Person.of(
+      {this.id,
+      this.name,
+      this.honorific,
+      this.aliases = const {},
+      this.sex,
+      this.birth,
+      this.death,
+      this.father,
+      this.mother,
+      this.siblings = const {},
+      this.spouses = const {},
+      this.partners = const {},
+      this.children = const {},
+      this.colleagues = const {},
+      this.knows = const {},
+      this.speaks = const {},
+      this.nationalities = const {},
+      this.emails = const {},
+      this.phones = const {},
+      this.links = const {},
+      this.notes = const {}})
+      : super._();
 
   factory _Person() => _Person.of();
 

@@ -12,9 +12,6 @@ typedef Email = String;
 /// Internationalized Resource Identifier (IRI).
 typedef IRI = String;
 
-/// IETF BCP 47 language tag.
-typedef LangTag = String;
-
 typedef Name = String;
 
 typedef Phone = String;
