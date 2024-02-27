@@ -11,3 +11,8 @@ typedef IRI = String;
 typedef Name = String;
 
 typedef Phone = String;
+
+enum Sex {
+  male,
+  female,
+}

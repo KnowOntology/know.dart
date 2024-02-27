@@ -8,25 +8,48 @@ import 'thing.dart' show Thing;
 sealed class Person extends Thing {
   Name? get nickname;
   Set<Name> get nicknames;
+
+  bool? get isMale => sex != null ? sex == Sex.male : null;
+  bool? get isFemale => sex != null ? sex == Sex.female : null;
+  Sex? get sex;
+
+  bool? get isChild => age != null ? age! < 18 : null;
+  bool? get isAdult => age != null ? age! >= 18 : null;
   Age? get age;
   Date? get birthdate;
+
   Event? get birth;
   Event? get death;
+
   Set<Person> get parents;
   Person? get father;
   Person? get mother;
+
+  bool get hasSiblings => siblings.isNotEmpty;
   Set<Relation<Person>> get siblings;
+
+  bool get hasSpouse => spouses.isNotEmpty;
   Person? get spouse;
   Set<Relation<Person>> get spouses;
+
+  bool get hasPartner => partners.isNotEmpty;
   Person? get partner;
   Set<Relation<Person>> get partners;
+
+  bool get hasChildren => children.isNotEmpty;
   Set<Relation<Person>> get children;
+
+  bool get hasColleagues => colleagues.isNotEmpty;
   Set<Relation<Person>> get colleagues;
+
   Set<Relation<Person>> get knows;
+
   Email? get email;
   Set<Email> get emails;
+
   Phone? get phone;
   Set<Phone> get phones;
+
   Set<String> get notes;
 
   Person._() : super.init();
@@ -35,6 +58,7 @@ sealed class Person extends Thing {
     String? id,
     Name? name,
     Set<Name> nicknames,
+    Sex? sex,
     Event? birth,
     Event? death,
     Person? father,
@@ -57,6 +81,7 @@ sealed class Person extends Thing {
     return Object.hash(
         super.hashCode,
         nicknames,
+        sex,
         birth,
         death,
         father,
@@ -78,6 +103,7 @@ sealed class Person extends Thing {
     if (other is! Person) return false;
     return super == other &&
         nicknames == other.nicknames &&
+        sex == other.sex &&
         birth == other.birth &&
         death == other.death &&
         father == other.father &&
@@ -105,6 +131,7 @@ sealed class Person extends Thing {
     final result = super.toJson();
     result.addAll({
       "nicknames": nicknames,
+      "sex": sex,
       "birth": birth,
       "death": death,
       "father": father,
@@ -135,6 +162,9 @@ final class _Person extends Person {
 
   @override
   Set<Name> nicknames;
+
+  @override
+  Sex? sex;
 
   @override
   Age? get age => null; // TODO: calculate from this.birthdate
@@ -200,6 +230,7 @@ final class _Person extends Person {
     this.id,
     this.name,
     this.nicknames = const {},
+    this.sex,
     this.birth,
     this.death,
     this.father,
