@@ -27,8 +27,12 @@ sealed class Person extends Thing {
   Person? get father;
   Person? get mother;
 
+  // TODO: #brothers, #sisters as filters of #siblings
+
   bool get hasSiblings => siblings.isNotEmpty;
   Set<Relation<Person>> get siblings;
+
+  // TODO: #husband, #wife as filters of #spouses
 
   bool get hasSpouse => spouses.isNotEmpty;
   Person? get spouse;
@@ -38,6 +42,8 @@ sealed class Person extends Thing {
   Person? get partner;
   Set<Relation<Person>> get partners;
 
+  // TODO: #sons, #daughters as filters of #children
+
   bool get hasChildren => children.isNotEmpty;
   Set<Relation<Person>> get children;
 
@@ -45,6 +51,11 @@ sealed class Person extends Thing {
   Set<Relation<Person>> get colleagues;
 
   Set<Relation<Person>> get knows;
+
+  Set<LangTag> get speaks;
+
+  CountryCode? get nationality;
+  Set<CountryCode> get nationalities;
 
   Email? get email;
   Set<Email> get emails;
@@ -75,6 +86,8 @@ sealed class Person extends Thing {
     Set<Relation<Person>> children,
     Set<Relation<Person>> colleagues,
     Set<Relation<Person>> knows,
+    Set<LangTag> speaks,
+    Set<CountryCode> nationalities,
     Set<Email> emails,
     Set<Phone> phones,
     Set<IRI> links,
@@ -100,6 +113,8 @@ sealed class Person extends Thing {
         children,
         colleagues,
         knows,
+        speaks,
+        nationalities,
         emails,
         phones,
         links,
@@ -124,6 +139,8 @@ sealed class Person extends Thing {
         children == other.children &&
         colleagues == other.colleagues &&
         knows == other.knows &&
+        speaks == other.speaks &&
+        nationalities == other.nationalities &&
         emails == other.emails &&
         phones == other.phones &&
         links == other.links &&
@@ -154,6 +171,8 @@ sealed class Person extends Thing {
       "children": children,
       "colleagues": colleagues,
       "knows": knows,
+      "speaks": speaks,
+      "nationalities": nationalities,
       "emails": emails,
       "phones": phones,
       "links": links,
@@ -228,6 +247,15 @@ final class _Person extends Person {
   Set<Relation<Person>> knows;
 
   @override
+  Set<LangTag> speaks;
+
+  @override
+  CountryCode? get nationality => nationalities.firstOrNull;
+
+  @override
+  Set<CountryCode> nationalities;
+
+  @override
   Email? get email => emails.firstOrNull;
 
   @override
@@ -264,6 +292,8 @@ final class _Person extends Person {
     this.children = const {},
     this.colleagues = const {},
     this.knows = const {},
+    this.speaks = const {},
+    this.nationalities = const {},
     this.emails = const {},
     this.phones = const {},
     this.links = const {},
