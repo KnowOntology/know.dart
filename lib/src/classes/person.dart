@@ -50,6 +50,9 @@ sealed class Person extends Thing {
   Phone? get phone;
   Set<Phone> get phones;
 
+  IRI? get link;
+  Set<IRI> get links;
+
   Set<String> get notes;
 
   Person._() : super.init();
@@ -71,6 +74,7 @@ sealed class Person extends Thing {
     Set<Relation<Person>> knows,
     Set<Email> emails,
     Set<Phone> phones,
+    Set<IRI> links,
     Set<String> notes,
   }) = _Person.of;
 
@@ -94,6 +98,7 @@ sealed class Person extends Thing {
         knows,
         emails,
         phones,
+        links,
         notes);
   }
 
@@ -116,6 +121,7 @@ sealed class Person extends Thing {
         knows == other.knows &&
         emails == other.emails &&
         phones == other.phones &&
+        links == other.links &&
         notes == other.notes;
   }
 
@@ -144,6 +150,7 @@ sealed class Person extends Thing {
       "knows": knows,
       "emails": emails,
       "phones": phones,
+      "links": links,
       "notes": notes,
     });
     return result;
@@ -224,6 +231,12 @@ final class _Person extends Person {
   Set<Phone> phones;
 
   @override
+  IRI? get link => links.firstOrNull;
+
+  @override
+  Set<IRI> links;
+
+  @override
   Set<String> notes;
 
   _Person.of({
@@ -243,6 +256,7 @@ final class _Person extends Person {
     this.knows = const {},
     this.emails = const {},
     this.phones = const {},
+    this.links = const {},
     this.notes = const {}
   }) : super._();
 
