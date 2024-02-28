@@ -10,11 +10,7 @@ sealed class File extends Thing {
 
   File._() : super.init();
 
-  factory File({
-    String? id,
-    Name? name,
-    int? size
-  }) = _File.of;
+  factory File({String? id, Name? name, int? size}) = _File.of;
 
   factory File.fromJson(final Map<String, dynamic> json) = _File.fromJson;
 

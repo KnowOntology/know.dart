@@ -1,6 +1,7 @@
 // This is free and unencumbered software released into the public domain.
 
 import '../prelude.dart';
+import 'place.dart' show Place;
 import 'thing.dart' show Thing;
 
 /// An event.
@@ -11,6 +12,9 @@ sealed class Event extends Thing {
   /// The end date of this event, if any.
   Date? get end;
 
+  /// The place where this event occurs, if any.
+  Place? get place;
+
   Event._() : super.init();
 
   factory Event({
@@ -18,6 +22,7 @@ sealed class Event extends Thing {
     Name? name,
     Date? start,
     Date? end,
+    Place? place,
   }) = _Event.of;
 
   factory Event.fromJson(final Map<String, dynamic> json) = _Event.fromJson;
@@ -31,7 +36,10 @@ sealed class Event extends Thing {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other is! Event) return false;
-    return super == other && start == other.start && end == other.end;
+    return super == other &&
+        start == other.start &&
+        end == other.end &&
+        place == other.place;
   }
 
   @override
@@ -47,6 +55,7 @@ sealed class Event extends Thing {
     result.addAll({
       "start": start.toString(),
       "end": end.toString(),
+      "place": place?.toJson(),
     });
     return result;
   }
@@ -65,11 +74,15 @@ final class _Event extends Event {
   @override
   Date? end;
 
+  @override
+  Place? place;
+
   _Event.of({
     this.id,
     this.name,
     this.start,
     this.end,
+    this.place,
   }) : super._();
 
   factory _Event() => _Event.of();

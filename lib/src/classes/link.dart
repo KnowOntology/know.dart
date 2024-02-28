@@ -10,11 +10,7 @@ sealed class Link extends Thing {
 
   Link._() : super.init();
 
-  factory Link({
-    String? id,
-    Name? name,
-    IRI? url
-  }) = _Link.of;
+  factory Link({String? id, Name? name, IRI? url}) = _Link.of;
 
   factory Link.fromJson(final Map<String, dynamic> json) = _Link.fromJson;
 
