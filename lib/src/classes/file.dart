@@ -3,7 +3,9 @@
 import '../prelude.dart';
 import 'thing.dart' show Thing;
 
+/// A file.
 sealed class File extends Thing {
+  /// The size of this file, if known.
   int? get size;
 
   File._() : super.init();

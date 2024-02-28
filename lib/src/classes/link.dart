@@ -3,7 +3,9 @@
 import '../prelude.dart';
 import 'thing.dart' show Thing;
 
+/// A link.
 sealed class Link extends Thing {
+  /// The URL of this link.
   IRI? get url;
 
   Link._() : super.init();

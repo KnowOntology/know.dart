@@ -3,6 +3,7 @@
 import '../prelude.dart';
 import 'thing.dart' show Thing;
 
+/// A place.
 sealed class Place extends Thing {
   // TODO: define properties
 

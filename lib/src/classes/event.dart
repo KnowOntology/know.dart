@@ -3,9 +3,12 @@
 import '../prelude.dart';
 import 'thing.dart' show Thing;
 
+/// An event.
 sealed class Event extends Thing {
+  /// The start date of this event.
   Date? get start;
 
+  /// The end date of this event, if any.
   Date? get end;
 
   Event._() : super.init();

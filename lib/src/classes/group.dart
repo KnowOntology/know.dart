@@ -3,6 +3,7 @@
 import '../prelude.dart';
 import 'thing.dart' show Thing;
 
+/// A group of people.
 sealed class Group extends Thing {
   // TODO: define properties
 
