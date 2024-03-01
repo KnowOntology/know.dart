@@ -25,6 +25,9 @@ sealed class Person extends Thing {
   /// ```
   Set<Name> get aliases;
 
+  /// A photograph of this person, if any.
+  IRI? get photo;
+
   /// Whether this person is known to be male.
   bool? get isMale => sex != null ? sex == Sex.male : null;
 
@@ -231,6 +234,7 @@ sealed class Person extends Thing {
     Name? name,
     String? honorific,
     Set<Name> aliases,
+    IRI? photo,
     Sex? sex,
     Event? birth,
     Event? death,
@@ -258,6 +262,7 @@ sealed class Person extends Thing {
         super.hashCode,
         honorific,
         aliases,
+        photo,
         sex,
         birth,
         death,
@@ -284,6 +289,7 @@ sealed class Person extends Thing {
     return super == other &&
         honorific == other.honorific &&
         aliases == other.aliases &&
+        photo == other.photo &&
         sex == other.sex &&
         birth == other.birth &&
         death == other.death &&
@@ -316,6 +322,7 @@ sealed class Person extends Thing {
     result.addAll({
       "honorific": honorific,
       "aliases": aliases,
+      "photo": photo?.toString(),
       "sex": sex,
       "birth": birth,
       "death": death,
@@ -353,6 +360,9 @@ final class _Person extends Person {
 
   @override
   Set<Name> aliases;
+
+  @override
+  IRI? photo;
 
   @override
   Sex? sex;
@@ -437,6 +447,7 @@ final class _Person extends Person {
       this.name,
       this.honorific,
       this.aliases = const {},
+      this.photo,
       this.sex,
       this.birth,
       this.death,
