@@ -18,8 +18,7 @@ final class Relation<S extends Thing, O extends Thing> {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other is! Relation<S, O>) return false;
-    return super == other &&
-        predicate == other.predicate &&
+    return predicate == other.predicate &&
         subject == other.subject &&
         object == other.object;
   }
