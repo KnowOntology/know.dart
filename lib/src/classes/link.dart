@@ -28,8 +28,9 @@ sealed class Link extends Thing {
 
   @override
   String toString() {
-    final json = toJson().toString();
-    final inner = json.substring(1, json.length - 1);
+    final json = toJson()..removeWhere((_, v) => v == null);
+    final jsonString = json.toString();
+    final inner = jsonString.substring(1, jsonString.length - 1);
     return "Link($inner)";
   }
 
