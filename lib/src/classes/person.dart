@@ -258,28 +258,29 @@ sealed class Person extends Thing {
 
   @override
   int get hashCode {
-    return Object.hash(
-        super.hashCode,
-        honorific,
-        aliases,
-        photo,
-        sex,
-        birth,
-        death,
-        father,
-        mother,
-        siblings,
-        spouses,
-        partners,
-        children,
-        colleagues,
-        knows,
-        speaks,
-        nationalities,
-        emails,
-        phones,
-        links,
-        notes);
+    return Object.hashAll([
+      super.hashCode,
+      honorific,
+      aliases,
+      photo,
+      sex,
+      birth,
+      death,
+      father,
+      mother,
+      siblings,
+      spouses,
+      partners,
+      children,
+      colleagues,
+      knows,
+      speaks,
+      nationalities,
+      emails,
+      phones,
+      links,
+      notes,
+    ]);
   }
 
   @override
