@@ -1,5 +1,7 @@
 // This is free and unencumbered software released into the public domain.
 
+import 'package:collection/collection.dart';
+
 import '../prelude.dart';
 import '../language.dart' show LanguageTag;
 import '../relation.dart' show Relation;
@@ -287,27 +289,28 @@ sealed class Person extends Thing {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other is! Person) return false;
+    final setEquality = const SetEquality(IdentityEquality());
     return super == other &&
         honorific == other.honorific &&
-        aliases == other.aliases &&
+        setEquality.equals(aliases, other.aliases) &&
         photo == other.photo &&
         sex == other.sex &&
         birth == other.birth &&
         death == other.death &&
         father == other.father &&
         mother == other.mother &&
-        siblings == other.siblings &&
-        spouses == other.spouses &&
-        partners == other.partners &&
-        children == other.children &&
-        colleagues == other.colleagues &&
-        knows == other.knows &&
-        speaks == other.speaks &&
-        nationalities == other.nationalities &&
-        emails == other.emails &&
-        phones == other.phones &&
-        links == other.links &&
-        notes == other.notes;
+        setEquality.equals(siblings, other.siblings) &&
+        setEquality.equals(spouses, other.spouses) &&
+        setEquality.equals(partners, other.partners) &&
+        setEquality.equals(children, other.children) &&
+        setEquality.equals(colleagues, other.colleagues) &&
+        setEquality.equals(knows, other.knows) &&
+        setEquality.equals(speaks, other.speaks) &&
+        setEquality.equals(nationalities, other.nationalities) &&
+        setEquality.equals(emails, other.emails) &&
+        setEquality.equals(phones, other.phones) &&
+        setEquality.equals(links, other.links) &&
+        setEquality.equals(notes, other.notes);
   }
 
   @override
@@ -322,25 +325,25 @@ sealed class Person extends Thing {
     final result = super.toJson();
     result.addAll({
       "honorific": honorific,
-      "aliases": aliases,
+      "aliases": aliases.toList(),
       "photo": photo?.toString(),
-      "sex": sex,
-      "birth": birth,
-      "death": death,
-      "father": father,
-      "mother": mother,
-      "siblings": siblings,
-      "spouses": spouses,
-      "partners": partners,
-      "children": children,
-      "colleagues": colleagues,
-      "knows": knows,
-      "speaks": speaks,
-      "nationalities": nationalities,
-      "emails": emails,
-      "phones": phones,
-      "links": links,
-      "notes": notes,
+      "sex": sex?.name,
+      "birth": birth?.toJson(),
+      "death": death?.toJson(),
+      "father": father?.toJson(),
+      "mother": mother?.toJson(),
+      "siblings": siblings.toList(), // TODO
+      "spouses": spouses.toList(), // TODO
+      "partners": partners.toList(), // TODO
+      "children": children.toList(), // TODO
+      "colleagues": colleagues.toList(), // TODO
+      "knows": knows.toList(), // TODO
+      "speaks": speaks.map((e) => e.toJson()).toList(),
+      "nationalities": nationalities.map((e) => e.toString()).toList(),
+      "emails": emails.map((e) => e.toString()).toList(),
+      "phones": phones.map((e) => e.toString()).toList(),
+      "links": links.map((e) => e.toString()).toList(),
+      "notes": notes.map((e) => e.toString()).toList(),
     });
     return result;
   }
@@ -471,7 +474,27 @@ final class _Person extends Person {
   factory _Person() => _Person.of();
 
   factory _Person.fromJson(final Map<String, dynamic> json) {
-    return Function.apply(
-        _Person.of, [], json.map((k, v) => MapEntry(Symbol(k), v)));
+    return Function.apply(_Person.of, [], json.map((k, v) {
+      final key = Symbol(k);
+      final val = switch (key) {
+        #aliases => (v as List<dynamic>).cast<Name>().toSet(),
+        #sex => Sex.values.firstWhereOrNull((e) => e.name == v),
+        #birth => v != null ? Event.fromJson(v) : null,
+        #death => v != null ? Event.fromJson(v) : null,
+        #father => v != null ? Person.fromJson(v) : null,
+        #mother => v != null ? Person.fromJson(v) : null,
+        // TODO: siblings, spouses, partners, children, colleagues, knows
+        //#siblings => (v as List).map((e) => Relation.fromJson(e)).toSet(),
+        #speaks =>
+          (v as List<dynamic>).map((e) => LanguageTag.fromJson(e)).toSet(),
+        #nationalities => (v as List<dynamic>).cast<CountryCode>().toSet(),
+        #emails => (v as List<dynamic>).cast<Email>().toSet(),
+        #phones => (v as List<dynamic>).cast<Phone>().toSet(),
+        #links => (v as List<dynamic>).cast<IRI>().toSet(),
+        #notes => (v as List<dynamic>).cast<String>().toSet(),
+        _ => v
+      };
+      return MapEntry(key, val);
+    }));
   }
 }

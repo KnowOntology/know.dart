@@ -29,7 +29,7 @@ sealed class Event extends Thing {
 
   @override
   int get hashCode {
-    return Object.hash(super.hashCode, start, end);
+    return Object.hash(super.hashCode, start, end, place);
   }
 
   @override
