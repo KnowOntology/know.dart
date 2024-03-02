@@ -8,6 +8,9 @@ import '../relation.dart' show Relation;
 import 'event.dart' show Event;
 import 'thing.dart' show Thing;
 
+/// A relationship between two people.
+typedef PersonRelation = Relation<Person, Person>;
+
 /// A person.
 sealed class Person extends Thing {
   /// The honorific title of this person, if known.
@@ -85,7 +88,7 @@ sealed class Person extends Thing {
   ///   print(sibling);
   /// }
   /// ```
-  Set<Relation<Person>> get siblings;
+  Set<PersonRelation> get siblings;
 
   // TODO: #husband, #wife as filters of #spouses
 
@@ -103,7 +106,7 @@ sealed class Person extends Thing {
   ///   print(spouse);
   /// }
   /// ```
-  Set<Relation<Person>> get spouses;
+  Set<PersonRelation> get spouses;
 
   /// Whether this person is known to have a partner.
   bool get hasPartner => partners.isNotEmpty;
@@ -119,7 +122,7 @@ sealed class Person extends Thing {
   ///   print(partner);
   /// }
   /// ```
-  Set<Relation<Person>> get partners;
+  Set<PersonRelation> get partners;
 
   // TODO: #sons, #daughters as filters of #children
 
@@ -134,7 +137,7 @@ sealed class Person extends Thing {
   ///   print(child);
   /// }
   /// ```
-  Set<Relation<Person>> get children;
+  Set<PersonRelation> get children;
 
   /// Whether this person is known to have colleagues.
   bool get hasColleagues => colleagues.isNotEmpty;
@@ -147,7 +150,7 @@ sealed class Person extends Thing {
   ///   print(colleague);
   /// }
   /// ```
-  Set<Relation<Person>> get colleagues;
+  Set<PersonRelation> get colleagues;
 
   /// Any people known to this person.
   ///
@@ -157,7 +160,7 @@ sealed class Person extends Thing {
   ///   print(contact);
   /// }
   /// ```
-  Set<Relation<Person>> get knows;
+  Set<PersonRelation> get knows;
 
   /// Whether this person is known to speak English.
   bool? get speaksEnglish =>
@@ -242,12 +245,12 @@ sealed class Person extends Thing {
     Event? death,
     Person? father,
     Person? mother,
-    Set<Relation<Person>> siblings,
-    Set<Relation<Person>> spouses,
-    Set<Relation<Person>> partners,
-    Set<Relation<Person>> children,
-    Set<Relation<Person>> colleagues,
-    Set<Relation<Person>> knows,
+    Set<PersonRelation> siblings,
+    Set<PersonRelation> spouses,
+    Set<PersonRelation> partners,
+    Set<PersonRelation> children,
+    Set<PersonRelation> colleagues,
+    Set<PersonRelation> knows,
     Set<LanguageTag> speaks,
     Set<CountryCode> nationalities,
     Set<Email> emails,
@@ -393,28 +396,28 @@ final class _Person extends Person {
   Person? mother;
 
   @override
-  Set<Relation<Person>> siblings;
+  Set<PersonRelation> siblings;
 
   @override
   Person? get spouse => spouses.firstOrNull?.object;
 
   @override
-  Set<Relation<Person>> spouses;
+  Set<PersonRelation> spouses;
 
   @override
   Person? get partner => partners.firstOrNull?.object;
 
   @override
-  Set<Relation<Person>> partners;
+  Set<PersonRelation> partners;
 
   @override
-  Set<Relation<Person>> children;
+  Set<PersonRelation> children;
 
   @override
-  Set<Relation<Person>> colleagues;
+  Set<PersonRelation> colleagues;
 
   @override
-  Set<Relation<Person>> knows;
+  Set<PersonRelation> knows;
 
   @override
   Set<LanguageTag> speaks;
@@ -483,8 +486,18 @@ final class _Person extends Person {
         #death => v != null ? Event.fromJson(v) : null,
         #father => v != null ? Person.fromJson(v) : null,
         #mother => v != null ? Person.fromJson(v) : null,
-        // TODO: siblings, spouses, partners, children, colleagues, knows
-        //#siblings => (v as List).map((e) => Relation.fromJson(e)).toSet(),
+        #siblings => _parseRelations(
+            #sibling, (v as List<dynamic>).cast<Map<String, dynamic>>()),
+        #spouses => _parseRelations(
+            #spouse, (v as List<dynamic>).cast<Map<String, dynamic>>()),
+        #partners => _parseRelations(
+            #partner, (v as List<dynamic>).cast<Map<String, dynamic>>()),
+        #children => _parseRelations(
+            #child, (v as List<dynamic>).cast<Map<String, dynamic>>()),
+        #colleagues => _parseRelations(
+            #colleague, (v as List<dynamic>).cast<Map<String, dynamic>>()),
+        #knows => _parseRelations(
+            #knows, (v as List<dynamic>).cast<Map<String, dynamic>>()),
         #speaks =>
           (v as List<dynamic>).map((e) => LanguageTag.fromJson(e)).toSet(),
         #nationalities => (v as List<dynamic>).cast<CountryCode>().toSet(),
@@ -497,4 +510,12 @@ final class _Person extends Person {
       return MapEntry(key, val);
     }));
   }
+}
+
+Set<PersonRelation> _parseRelations(
+    Symbol predicate, List<Map<String, dynamic>> input) {
+  return input.map((e) {
+    final p = Person.fromJson(e);
+    return PersonRelation(predicate, null, p);
+  }).toSet();
 }

@@ -2,25 +2,25 @@
 
 import 'classes/thing.dart' show Thing;
 
-final class Relation<T extends Thing> {
-  T subject;
+final class Relation<S extends Thing, O extends Thing> {
   Symbol predicate;
-  T object;
+  S? subject;
+  O? object;
 
-  Relation(this.subject, this.predicate, this.object);
+  Relation(this.predicate, [this.subject, this.object]);
 
   @override
   int get hashCode {
-    return Object.hash(super.hashCode, subject, predicate, object);
+    return Object.hash(super.hashCode, predicate, subject, object);
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    if (other is! Relation<T>) return false;
+    if (other is! Relation<S, O>) return false;
     return super == other &&
-        subject == other.subject &&
         predicate == other.predicate &&
+        subject == other.subject &&
         object == other.object;
   }
 
@@ -32,8 +32,8 @@ final class Relation<T extends Thing> {
   }
 
   Map<String, dynamic> toJson() => {
-        "subject": subject.toJson(),
         "predicate": predicate.toString(),
-        "object": object.toJson(),
+        "subject": subject?.toJson(),
+        "object": object?.toJson(),
       };
 }
