@@ -43,7 +43,7 @@ abstract base class Thing {
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "name": name.toString(),
+        "name": name?.toString(),
       };
 }
 

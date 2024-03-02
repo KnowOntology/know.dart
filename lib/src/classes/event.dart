@@ -52,13 +52,12 @@ sealed class Event extends Thing {
 
   @override
   Map<String, dynamic> toJson() {
-    final result = super.toJson();
-    result.addAll({
-      "start": start.toString(),
-      "end": end.toString(),
-      "place": place?.toJson(),
-    });
-    return result;
+    return super.toJson()
+      ..addAll({
+        "start": start?.toString(),
+        "end": end?.toString(),
+        "place": place?.toJson(),
+      });
   }
 }
 

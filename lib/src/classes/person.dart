@@ -326,30 +326,29 @@ sealed class Person extends Thing {
 
   @override
   Map<String, dynamic> toJson() {
-    final result = super.toJson();
-    result.addAll({
-      "honorific": honorific,
-      "aliases": aliases.toList(),
-      "photo": photo?.toString(),
-      "sex": sex?.name,
-      "birth": birth?.toJson(),
-      "death": death?.toJson(),
-      "father": father?.toJson(),
-      "mother": mother?.toJson(),
-      "siblings": siblings.toList(), // TODO
-      "spouses": spouses.toList(), // TODO
-      "partners": partners.toList(), // TODO
-      "children": children.toList(), // TODO
-      "colleagues": colleagues.toList(), // TODO
-      "knows": knows.toList(), // TODO
-      "speaks": speaks.map((e) => e.toJson()).toList(),
-      "nationalities": nationalities.map((e) => e.toString()).toList(),
-      "emails": emails.map((e) => e.toString()).toList(),
-      "phones": phones.map((e) => e.toString()).toList(),
-      "links": links.map((e) => e.toString()).toList(),
-      "notes": notes.map((e) => e.toString()).toList(),
-    });
-    return result;
+    return super.toJson()
+      ..addAll({
+        "honorific": honorific,
+        "aliases": aliases.toList(),
+        "photo": photo?.toString(),
+        "sex": sex?.name,
+        "birth": birth?.toJson(),
+        "death": death?.toJson(),
+        "father": father?.toJson(),
+        "mother": mother?.toJson(),
+        "siblings": siblings.toList(), // TODO
+        "spouses": spouses.toList(), // TODO
+        "partners": partners.toList(), // TODO
+        "children": children.toList(), // TODO
+        "colleagues": colleagues.toList(), // TODO
+        "knows": knows.toList(), // TODO
+        "speaks": speaks.map((e) => e.toJson()).toList(),
+        "nationalities": nationalities.map((e) => e.toString()).toList(),
+        "emails": emails.map((e) => e.toString()).toList(),
+        "phones": phones.map((e) => e.toString()).toList(),
+        "links": links.map((e) => e.toString()).toList(),
+        "notes": notes.map((e) => e.toString()).toList(),
+      });
   }
 }
 

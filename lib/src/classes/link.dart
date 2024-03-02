@@ -36,11 +36,10 @@ sealed class Link extends Thing {
 
   @override
   Map<String, dynamic> toJson() {
-    final result = super.toJson();
-    result.addAll({
-      "url": url,
-    });
-    return result;
+    return super.toJson()
+      ..addAll({
+        "url": url,
+      });
   }
 }
 

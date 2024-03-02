@@ -38,9 +38,7 @@ sealed class Group extends Thing {
 
   @override
   Map<String, dynamic> toJson() {
-    final result = super.toJson();
-    result.addAll({}); // TODO
-    return result;
+    return super.toJson()..addAll({}); // TODO
   }
 }
 
