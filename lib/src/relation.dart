@@ -1,6 +1,7 @@
 // This is free and unencumbered software released into the public domain.
 
 import 'classes/thing.dart' show Thing;
+import 'inspect.dart' show inspect;
 
 final class Relation<S extends Thing, O extends Thing> {
   Symbol predicate;
@@ -25,14 +26,18 @@ final class Relation<S extends Thing, O extends Thing> {
 
   @override
   String toString() {
-    final json = toJson().toString();
-    final inner = json.substring(1, json.length - 1);
-    return "Relation($inner)";
+    return inspect("Relation", toJson());
   }
 
   Map<String, dynamic> toJson() => {
-        "predicate": predicate.toString(),
+        "predicate": _formatPredicate(predicate),
         "subject": subject?.toJson(),
         "object": object?.toJson(),
       };
+}
+
+String _formatPredicate(Symbol predicate) {
+  var predicateString = predicate.toString();
+  predicateString = predicateString.substring("Symbol(\"".length, predicateString.length - 2);
+  return "#$predicateString";
 }

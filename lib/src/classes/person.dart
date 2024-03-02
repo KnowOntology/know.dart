@@ -3,6 +3,7 @@
 import 'package:collection/collection.dart';
 
 import '../prelude.dart';
+import '../inspect.dart' show inspect;
 import '../language.dart' show LanguageTag;
 import '../relation.dart' show Relation;
 import 'event.dart' show Event;
@@ -318,10 +319,7 @@ sealed class Person extends Thing {
 
   @override
   String toString() {
-    final json = toJson()..removeWhere((_, v) => v == null);
-    final jsonString = json.toString();
-    final inner = jsonString.substring(1, jsonString.length - 1);
-    return "Person($inner)";
+    return inspect("Person", toJson());
   }
 
   @override

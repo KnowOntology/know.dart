@@ -1,6 +1,7 @@
 // This is free and unencumbered software released into the public domain.
 
 import '../prelude.dart';
+import '../inspect.dart' show inspect;
 import 'package:meta/meta.dart' show protected;
 
 /// A thing.
@@ -35,10 +36,7 @@ abstract base class Thing {
 
   @override
   String toString() {
-    final json = toJson()..removeWhere((_, v) => v == null);
-    final jsonString = json.toString();
-    final inner = jsonString.substring(1, jsonString.length - 1);
-    return "Thing($inner)";
+    return inspect("Thing", toJson());
   }
 
   Map<String, dynamic> toJson() => {

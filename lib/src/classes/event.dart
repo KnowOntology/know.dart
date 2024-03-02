@@ -1,6 +1,7 @@
 // This is free and unencumbered software released into the public domain.
 
 import '../prelude.dart';
+import '../inspect.dart' show inspect;
 import 'place.dart' show Place;
 import 'thing.dart' show Thing;
 
@@ -44,10 +45,7 @@ sealed class Event extends Thing {
 
   @override
   String toString() {
-    final json = toJson()..removeWhere((_, v) => v == null);
-    final jsonString = json.toString();
-    final inner = jsonString.substring(1, jsonString.length - 1);
-    return "Event($inner)";
+    return inspect("Event", toJson());
   }
 
   @override
