@@ -38,6 +38,7 @@ final class Relation<S extends Thing, O extends Thing> {
 
 String _formatPredicate(Symbol predicate) {
   var predicateString = predicate.toString();
-  predicateString = predicateString.substring("Symbol(\"".length, predicateString.length - 2);
+  predicateString =
+      predicateString.substring("Symbol(\"".length, predicateString.length - 2);
   return "#$predicateString";
 }

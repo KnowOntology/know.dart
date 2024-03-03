@@ -3,7 +3,7 @@
 import 'package:collection/collection.dart';
 
 import '../prelude.dart';
-import '../inspect.dart' show inspect;
+import '../inspect.dart' show compactJSON, inspect;
 import '../language.dart' show LanguageTag;
 import '../relation.dart' show Relation;
 import 'event.dart' show Event;
@@ -293,7 +293,7 @@ sealed class Person extends Thing {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (other is! Person) return false;
-    final setEquality = const SetEquality(IdentityEquality());
+    final setEquality = const SetEquality();
     return super == other &&
         honorific == other.honorific &&
         setEquality.equals(aliases, other.aliases) &&
@@ -324,7 +324,7 @@ sealed class Person extends Thing {
 
   @override
   Map<String, dynamic> toJson() {
-    return super.toJson()
+    final result = super.toJson()
       ..addAll({
         "honorific": honorific,
         "aliases": aliases.toList(),
@@ -334,12 +334,12 @@ sealed class Person extends Thing {
         "death": death?.toJson(),
         "father": father?.toJson(),
         "mother": mother?.toJson(),
-        "siblings": siblings.toList(), // TODO
-        "spouses": spouses.toList(), // TODO
-        "partners": partners.toList(), // TODO
-        "children": children.toList(), // TODO
-        "colleagues": colleagues.toList(), // TODO
-        "knows": knows.toList(), // TODO
+        "siblings": siblings.map((r) => r.object?.toJson()).toList(),
+        "spouses": spouses.map((r) => r.object?.toJson()).toList(),
+        "partners": partners.map((r) => r.object?.toJson()).toList(),
+        "children": children.map((r) => r.object?.toJson()).toList(),
+        "colleagues": colleagues.map((r) => r.object?.toJson()).toList(),
+        "knows": knows.map((r) => r.object?.toJson()).toList(),
         "speaks": speaks.map((e) => e.toJson()).toList(),
         "nationalities": nationalities.map((e) => e.toString()).toList(),
         "emails": emails.map((e) => e.toString()).toList(),
@@ -347,6 +347,7 @@ sealed class Person extends Thing {
         "links": links.map((e) => e.toString()).toList(),
         "notes": notes.map((e) => e.toString()).toList(),
       });
+    return compactJSON(result);
   }
 }
 

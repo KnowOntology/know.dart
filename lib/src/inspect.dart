@@ -6,6 +6,10 @@ String inspect(final String className, final Map<String, dynamic> json) {
   return "$className($inner)";
 }
 
+Map<String, dynamic> compactJSON(final Map<String, dynamic> input) {
+  return input.compact();
+}
+
 extension on Map<String, dynamic> {
   Map<String, dynamic> compact() {
     removeWhere((_, v) => v == null);

@@ -16,7 +16,14 @@ void main() {
     death: null,
     father: Person(name: "John Anderson"),
     mother: Person(name: "Michelle McGahey"),
-    // TODO: siblings, spouses, partners, children, colleagues, knows
+    siblings: {},
+    spouses: {},
+    partners: {
+      //Relation(#partner, null, Person(name: "Trinity")),
+    },
+    children: {},
+    colleagues: {},
+    knows: {},
     speaks: {LanguageTag.en},
     nationalities: {"us"},
     emails: {"thomas.anderson@metacortex.com"},
@@ -24,6 +31,7 @@ void main() {
     links: {"https://matrix.fandom.com/wiki/Neo"},
     notes: {"Neo loves Trinity."},
   );
+
   final personJson = {
     "id": "1",
     "name": "Thomas Anderson",
@@ -33,10 +41,13 @@ void main() {
         "https://static.wikia.nocookie.net/matrix/images/3/32/Neo.jpg/revision/latest/smart/width/100/height/100",
     "sex": "male",
     "birth": {"start": "1962-03-11"},
-    "death": null,
     "father": {"name": "John Anderson"},
     "mother": {"name": "Michelle McGahey"},
-    // TODO: siblings, spouses, partners, children, colleagues, knows
+    //"partners": [
+    //  {"name": "Trinity"},
+    //],
+    //"colleagues": [],
+    //"knows": [],
     "speaks": ["en"],
     "nationalities": ["us"],
     "emails": ["thomas.anderson@metacortex.com"],
@@ -44,13 +55,18 @@ void main() {
     "links": ["https://matrix.fandom.com/wiki/Neo"],
     "notes": ["Neo loves Trinity."],
   };
+
   group('Person', () {
+    test('identity', () {
+      expect(person, isA<Person>());
+      expect(person, equals(person));
+    });
     test('.fromJson', () {
       expect(Person.fromJson(personJson), isA<Person>());
       expect(Person.fromJson(personJson), equals(person));
     });
     test('#toJson', () {
-      //expect(person.toJson(), equals(personJson)); // FIXME
+      expect(person.toJson(), equals(personJson));
     });
   });
 }
