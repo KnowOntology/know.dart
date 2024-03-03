@@ -8,10 +8,12 @@ void main() {
     id: "123",
     name: "An Event",
   );
+
   final thingJson = {
     "id": "123",
     "name": "An Event",
   };
+
   group('Thing', () {
     test('.fromJson', () {
       expect(Thing.fromJson(thingJson), isA<Thing>());

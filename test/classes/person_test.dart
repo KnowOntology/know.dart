@@ -19,11 +19,15 @@ void main() {
     siblings: {},
     spouses: {},
     partners: {
-      //Relation(#partner, null, Person(name: "Trinity")),
+      Relation(#partner, null, Person(name: "Trinity")),
     },
     children: {},
-    colleagues: {},
-    knows: {},
+    colleagues: {
+      Relation(#colleague, null, Person(name: "Morpheus")),
+    },
+    knows: {
+      Relation(#knows, null, Person(name: "Agent Smith")),
+    },
     speaks: {LanguageTag.en},
     nationalities: {"us"},
     emails: {"thomas.anderson@metacortex.com"},
@@ -43,11 +47,15 @@ void main() {
     "birth": {"start": "1962-03-11"},
     "father": {"name": "John Anderson"},
     "mother": {"name": "Michelle McGahey"},
-    //"partners": [
-    //  {"name": "Trinity"},
-    //],
-    //"colleagues": [],
-    //"knows": [],
+    "partners": [
+      {"name": "Trinity"},
+    ],
+    "colleagues": [
+      {"name": "Morpheus"},
+    ],
+    "knows": [
+      {"name": "Agent Smith"},
+    ],
     "speaks": ["en"],
     "nationalities": ["us"],
     "emails": ["thomas.anderson@metacortex.com"],
@@ -61,12 +69,12 @@ void main() {
       expect(person, isA<Person>());
       expect(person, equals(person));
     });
+    test('#toJson', () {
+      expect(person.toJson(), equals(personJson));
+    });
     test('.fromJson', () {
       expect(Person.fromJson(personJson), isA<Person>());
       expect(Person.fromJson(personJson), equals(person));
-    });
-    test('#toJson', () {
-      expect(person.toJson(), equals(personJson));
     });
   });
 }

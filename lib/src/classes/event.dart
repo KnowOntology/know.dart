@@ -1,7 +1,7 @@
 // This is free and unencumbered software released into the public domain.
 
 import '../prelude.dart';
-import '../inspect.dart' show inspect;
+import '../inspect.dart' show compactJSON, inspect;
 import 'place.dart' show Place;
 import 'thing.dart' show Thing;
 
@@ -50,12 +50,13 @@ sealed class Event extends Thing {
 
   @override
   Map<String, dynamic> toJson() {
-    return super.toJson()
+    final result = super.toJson()
       ..addAll({
         "start": start?.toString(),
         "end": end?.toString(),
         "place": place?.toJson(),
       });
+    return compactJSON(result);
   }
 }
 

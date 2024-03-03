@@ -11,20 +11,21 @@ void main() {
     end: "2021-01-02",
     place: null,
   );
+
   final eventJson = {
     "id": "123",
     "name": "An Event",
     "start": "2021-01-01",
     "end": "2021-01-02",
-    "place": null,
   };
+
   group('Event', () {
+    test('#toJson', () {
+      expect(event.toJson(), equals(eventJson));
+    });
     test('.fromJson', () {
       expect(Event.fromJson(eventJson), isA<Event>());
       expect(Event.fromJson(eventJson), equals(event));
-    });
-    test('#toJson', () {
-      expect(event.toJson(), equals(eventJson));
     });
   });
 }

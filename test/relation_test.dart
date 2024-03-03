@@ -1,5 +1,6 @@
 // This is free and unencumbered software released into the public domain.
 
+import 'package:collection/collection.dart';
 import 'package:know/know.dart';
 import 'package:test/test.dart';
 
@@ -37,6 +38,20 @@ void main() {
       final relation2 =
           Relation(#knows, Person(id: '1'), Person(id: '3')); // NB
       expect(relation1, isNot(equals(relation2)));
+    });
+  });
+
+  group('Set<Relation>', () {
+    test('is equal using the built-in equals matcher', () {
+      final Set<PersonRelation> set1 = {PersonRelation(#knows)};
+      final Set<PersonRelation> set2 = {PersonRelation(#knows)};
+      expect(set1, equals(set2));
+    });
+    test('is equal using the SetEquality implementation', () {
+      final Set<PersonRelation> set1 = {PersonRelation(#knows)};
+      final Set<PersonRelation> set2 = {PersonRelation(#knows)};
+      final setEquality = const SetEquality(DefaultEquality<PersonRelation>());
+      expect(setEquality.equals(set1, set2), isTrue);
     });
   });
 }

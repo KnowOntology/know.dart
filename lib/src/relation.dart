@@ -12,7 +12,7 @@ final class Relation<S extends Thing, O extends Thing> {
 
   @override
   int get hashCode {
-    return Object.hash(super.hashCode, predicate, subject, object);
+    return Object.hash(predicate, subject, object);
   }
 
   @override
