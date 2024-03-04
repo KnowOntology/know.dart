@@ -34,7 +34,20 @@ extension JSONCompact on Map<String, dynamic> {
     removeWhere((_, v) => v is List && v.isEmpty);
     removeWhere((_, v) => v is Set && v.isEmpty);
     removeWhere((_, v) => v is Map && v.isEmpty);
-    updateAll((_, v) => v is Map ? (v as Map<String, dynamic>).compact() : v);
+    keys.toList().forEach((k) {
+      final v = this[k];
+      if (v is Map) {
+        this[k] = (v as Map<String, dynamic>).compact();
+      } else if (v is Set) {
+        this[k] = v
+            .map((e) => e is! Map ? e : (e as Map<String, dynamic>).compact())
+            .toList();
+      } else if (v is List) {
+        this[k] = v
+            .map((e) => e is! Map ? e : (e as Map<String, dynamic>).compact())
+            .toList();
+      }
+    });
     return this;
   }
 }
