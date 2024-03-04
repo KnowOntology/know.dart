@@ -17,10 +17,10 @@ void main() {
     father: Person(name: "John Anderson"),
     mother: Person(name: "Michelle McGahey"),
     siblings: {},
-    spouses: {},
     partners: {
       Relation(#partner, null, Person(name: "Trinity")),
     },
+    spouses: {},
     children: {},
     colleagues: {
       Relation(#colleague, null, Person(name: "Morpheus")),

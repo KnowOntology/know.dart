@@ -91,6 +91,22 @@ sealed class Person extends Thing {
   /// ```
   Set<PersonRelation> get siblings;
 
+  /// Whether this person is known to have a partner.
+  bool get hasPartner => partners.isNotEmpty;
+
+  /// The current partner of this person, if known.
+  Person? get partner;
+
+  /// The known current/former partners of this person.
+  ///
+  /// ```dart
+  /// for (var relation in person.partners) {
+  ///   var partner = relation.object;
+  ///   print(partner);
+  /// }
+  /// ```
+  Set<PersonRelation> get partners;
+
   // TODO: #husband, #wife as filters of #spouses
 
   /// Whether this person is known to have a spouse.
@@ -108,22 +124,6 @@ sealed class Person extends Thing {
   /// }
   /// ```
   Set<PersonRelation> get spouses;
-
-  /// Whether this person is known to have a partner.
-  bool get hasPartner => partners.isNotEmpty;
-
-  /// The current partner of this person, if known.
-  Person? get partner;
-
-  /// The known current/former partners of this person.
-  ///
-  /// ```dart
-  /// for (var relation in person.partners) {
-  ///   var partner = relation.object;
-  ///   print(partner);
-  /// }
-  /// ```
-  Set<PersonRelation> get partners;
 
   // TODO: #sons, #daughters as filters of #children
 
@@ -247,8 +247,8 @@ sealed class Person extends Thing {
     Person? father,
     Person? mother,
     Set<PersonRelation> siblings,
-    Set<PersonRelation> spouses,
     Set<PersonRelation> partners,
+    Set<PersonRelation> spouses,
     Set<PersonRelation> children,
     Set<PersonRelation> colleagues,
     Set<PersonRelation> knows,
@@ -275,8 +275,8 @@ sealed class Person extends Thing {
       father,
       mother,
       siblings,
-      spouses,
       partners,
+      spouses,
       children,
       colleagues,
       knows,
@@ -304,8 +304,8 @@ sealed class Person extends Thing {
         father == other.father &&
         mother == other.mother &&
         setEquality.equals(siblings, other.siblings) &&
-        setEquality.equals(spouses, other.spouses) &&
         setEquality.equals(partners, other.partners) &&
+        setEquality.equals(spouses, other.spouses) &&
         setEquality.equals(children, other.children) &&
         setEquality.equals(colleagues, other.colleagues) &&
         setEquality.equals(knows, other.knows) &&
@@ -335,8 +335,8 @@ sealed class Person extends Thing {
         "father": father?.toJson(),
         "mother": mother?.toJson(),
         "siblings": siblings.map((r) => r.object?.toJson()).toList(),
-        "spouses": spouses.map((r) => r.object?.toJson()).toList(),
         "partners": partners.map((r) => r.object?.toJson()).toList(),
+        "spouses": spouses.map((r) => r.object?.toJson()).toList(),
         "children": children.map((r) => r.object?.toJson()).toList(),
         "colleagues": colleagues.map((r) => r.object?.toJson()).toList(),
         "knows": knows.map((r) => r.object?.toJson()).toList(),
@@ -398,16 +398,16 @@ final class _Person extends Person {
   Set<PersonRelation> siblings;
 
   @override
-  Person? get spouse => spouses.firstOrNull?.object;
-
-  @override
-  Set<PersonRelation> spouses;
-
-  @override
   Person? get partner => partners.firstOrNull?.object;
 
   @override
   Set<PersonRelation> partners;
+
+  @override
+  Person? get spouse => spouses.firstOrNull?.object;
+
+  @override
+  Set<PersonRelation> spouses;
 
   @override
   Set<PersonRelation> children;
@@ -460,8 +460,8 @@ final class _Person extends Person {
       this.father,
       this.mother,
       this.siblings = const {},
-      this.spouses = const {},
       this.partners = const {},
+      this.spouses = const {},
       this.children = const {},
       this.colleagues = const {},
       this.knows = const {},
@@ -487,10 +487,10 @@ final class _Person extends Person {
         #mother => v != null ? Person.fromJson(v) : null,
         #siblings => _parseRelations(
             #sibling, (v as List<dynamic>).cast<Map<String, dynamic>>()),
-        #spouses => _parseRelations(
-            #spouse, (v as List<dynamic>).cast<Map<String, dynamic>>()),
         #partners => _parseRelations(
             #partner, (v as List<dynamic>).cast<Map<String, dynamic>>()),
+        #spouses => _parseRelations(
+            #spouse, (v as List<dynamic>).cast<Map<String, dynamic>>()),
         #children => _parseRelations(
             #child, (v as List<dynamic>).cast<Map<String, dynamic>>()),
         #colleagues => _parseRelations(
