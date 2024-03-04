@@ -3,7 +3,7 @@
 import 'package:collection/collection.dart';
 
 import '../prelude.dart';
-import '../inspect.dart' show compactJSON, inspect;
+import '../inspect.dart' show inspect;
 import '../language.dart' show LanguageTag;
 import '../relation.dart' show Relation;
 import 'event.dart' show Event;
@@ -263,31 +263,29 @@ sealed class Person extends Thing {
   factory Person.fromJson(final Map<String, dynamic> json) = _Person.fromJson;
 
   @override
-  int get hashCode {
-    return Object.hashAll([
-      super.hashCode,
-      honorific,
-      aliases,
-      photo,
-      sex,
-      birth,
-      death,
-      father,
-      mother,
-      siblings,
-      partners,
-      spouses,
-      children,
-      colleagues,
-      knows,
-      speaks,
-      nationalities,
-      emails,
-      phones,
-      links,
-      notes,
-    ]);
-  }
+  int get hashCode => Object.hashAll([
+        super.hashCode,
+        honorific,
+        aliases,
+        photo,
+        sex,
+        birth,
+        death,
+        father,
+        mother,
+        siblings,
+        partners,
+        spouses,
+        children,
+        colleagues,
+        knows,
+        speaks,
+        nationalities,
+        emails,
+        phones,
+        links,
+        notes,
+      ]);
 
   @override
   bool operator ==(Object other) {
@@ -318,37 +316,33 @@ sealed class Person extends Thing {
   }
 
   @override
-  String toString() {
-    return inspect("Person", toJson());
-  }
+  String toString() => inspect("Person", toJson());
 
   @override
-  Map<String, dynamic> toJson() {
-    final result = super.toJson()
-      ..addAll({
-        "honorific": honorific,
-        "aliases": aliases.toList(),
-        "photo": photo?.toString(),
-        "sex": sex?.name,
-        "birth": birth?.toJson(),
-        "death": death?.toJson(),
-        "father": father?.toJson(),
-        "mother": mother?.toJson(),
-        "siblings": siblings.map((r) => r.object?.toJson()).toList(),
-        "partners": partners.map((r) => r.object?.toJson()).toList(),
-        "spouses": spouses.map((r) => r.object?.toJson()).toList(),
-        "children": children.map((r) => r.object?.toJson()).toList(),
-        "colleagues": colleagues.map((r) => r.object?.toJson()).toList(),
-        "knows": knows.map((r) => r.object?.toJson()).toList(),
-        "speaks": speaks.map((e) => e.toJson()).toList(),
-        "nationalities": nationalities.map((e) => e.toString()).toList(),
-        "emails": emails.map((e) => e.toString()).toList(),
-        "phones": phones.map((e) => e.toString()).toList(),
-        "links": links.map((e) => e.toString()).toList(),
-        "notes": notes.map((e) => e.toString()).toList(),
-      });
-    return compactJSON(result);
-  }
+  Map<String, dynamic> toJson() => super.toJson()
+    ..addAll({
+      "honorific": honorific,
+      "aliases": aliases.toList(),
+      "photo": photo?.toString(),
+      "sex": sex?.name,
+      "birth": birth?.toJson(),
+      "death": death?.toJson(),
+      "father": father?.toJson(),
+      "mother": mother?.toJson(),
+      "siblings": siblings.map((r) => r.object?.toJson()).toList(),
+      "partners": partners.map((r) => r.object?.toJson()).toList(),
+      "spouses": spouses.map((r) => r.object?.toJson()).toList(),
+      "children": children.map((r) => r.object?.toJson()).toList(),
+      "colleagues": colleagues.map((r) => r.object?.toJson()).toList(),
+      "knows": knows.map((r) => r.object?.toJson()).toList(),
+      "speaks": speaks.map((e) => e.toJson()).toList(),
+      "nationalities": nationalities.map((e) => e.toString()).toList(),
+      "emails": emails.map((e) => e.toString()).toList(),
+      "phones": phones.map((e) => e.toString()).toList(),
+      "links": links.map((e) => e.toString()).toList(),
+      "notes": notes.map((e) => e.toString()).toList(),
+    })
+    ..compact();
 }
 
 final class _Person extends Person {

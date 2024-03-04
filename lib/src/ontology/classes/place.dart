@@ -10,7 +10,5 @@ abstract final class PlaceClass {
 
   // TODO
 
-  static Set<Property> properties() {
-    return Set.unmodifiable({});
-  }
+  static Set<Property> properties() => Set.unmodifiable({});
 }

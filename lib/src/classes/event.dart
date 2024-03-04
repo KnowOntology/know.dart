@@ -1,7 +1,7 @@
 // This is free and unencumbered software released into the public domain.
 
 import '../prelude.dart';
-import '../inspect.dart' show compactJSON, inspect;
+import '../inspect.dart' show inspect;
 import 'place.dart' show Place;
 import 'thing.dart' show Thing;
 
@@ -29,9 +29,7 @@ sealed class Event extends Thing {
   factory Event.fromJson(final Map<String, dynamic> json) = _Event.fromJson;
 
   @override
-  int get hashCode {
-    return Object.hash(super.hashCode, start, end, place);
-  }
+  int get hashCode => Object.hash(super.hashCode, start, end, place);
 
   @override
   bool operator ==(Object other) {
@@ -44,20 +42,16 @@ sealed class Event extends Thing {
   }
 
   @override
-  String toString() {
-    return inspect("Event", toJson());
-  }
+  String toString() => inspect("Event", toJson());
 
   @override
-  Map<String, dynamic> toJson() {
-    final result = super.toJson()
-      ..addAll({
-        "start": start?.toString(),
-        "end": end?.toString(),
-        "place": place?.toJson(),
-      });
-    return compactJSON(result);
-  }
+  Map<String, dynamic> toJson() => super.toJson()
+    ..addAll({
+      "start": start?.toString(),
+      "end": end?.toString(),
+      "place": place?.toJson(),
+    })
+    ..compact();
 }
 
 final class _Event extends Event {

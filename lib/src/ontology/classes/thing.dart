@@ -56,10 +56,8 @@ abstract final class ThingClass {
     },
   );
 
-  static Set<Property> properties() {
-    return Set.unmodifiable({
-      id,
-      name,
-    });
-  }
+  static Set<Property> properties() => Set.unmodifiable({
+        id,
+        name,
+      });
 }

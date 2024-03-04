@@ -16,9 +16,7 @@ sealed class Link extends Thing {
   factory Link.fromJson(final Map<String, dynamic> json) = _Link.fromJson;
 
   @override
-  int get hashCode {
-    return Object.hash(super.hashCode, url);
-  }
+  int get hashCode => Object.hash(super.hashCode, url);
 
   @override
   bool operator ==(Object other) {
@@ -28,17 +26,14 @@ sealed class Link extends Thing {
   }
 
   @override
-  String toString() {
-    return inspect("Link", toJson());
-  }
+  String toString() => inspect("Link", toJson());
 
   @override
-  Map<String, dynamic> toJson() {
-    return super.toJson()
-      ..addAll({
-        "url": url,
-      });
-  }
+  Map<String, dynamic> toJson() => super.toJson()
+    ..addAll({
+      "url": url,
+    })
+    ..compact();
 }
 
 final class _Link extends Link {

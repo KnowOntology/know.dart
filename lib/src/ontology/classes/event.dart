@@ -77,11 +77,9 @@ abstract final class EventClass {
     seeAlso: {},
   );
 
-  static Set<Property> properties() {
-    return Set.unmodifiable({
-      start,
-      end,
-      place,
-    });
-  }
+  static Set<Property> properties() => Set.unmodifiable({
+        start,
+        end,
+        place,
+      });
 }

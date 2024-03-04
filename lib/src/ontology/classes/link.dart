@@ -31,9 +31,7 @@ abstract final class LinkClass {
     seeAlso: {},
   );
 
-  static Set<Property> properties() {
-    return Set.unmodifiable({
-      url,
-    });
-  }
+  static Set<Property> properties() => Set.unmodifiable({
+        url,
+      });
 }

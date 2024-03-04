@@ -31,9 +31,7 @@ abstract final class FileClass {
     seeAlso: {},
   );
 
-  static Set<Property> properties() {
-    return Set.unmodifiable({
-      size,
-    });
-  }
+  static Set<Property> properties() => Set.unmodifiable({
+        size,
+      });
 }

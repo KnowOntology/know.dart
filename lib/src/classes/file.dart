@@ -16,9 +16,7 @@ sealed class File extends Thing {
   factory File.fromJson(final Map<String, dynamic> json) = _File.fromJson;
 
   @override
-  int get hashCode {
-    return Object.hash(super.hashCode, size);
-  }
+  int get hashCode => Object.hash(super.hashCode, size);
 
   @override
   bool operator ==(Object other) {
@@ -28,17 +26,14 @@ sealed class File extends Thing {
   }
 
   @override
-  String toString() {
-    return inspect("File", toJson());
-  }
+  String toString() => inspect("File", toJson());
 
   @override
-  Map<String, dynamic> toJson() {
-    return super.toJson()
-      ..addAll({
-        "size": size,
-      });
-  }
+  Map<String, dynamic> toJson() => super.toJson()
+    ..addAll({
+      "size": size,
+    })
+    ..compact();
 }
 
 final class _File extends File {

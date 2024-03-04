@@ -18,9 +18,7 @@ sealed class Group extends Thing {
   factory Group.fromJson(final Map<String, dynamic> json) = _Group.fromJson;
 
   @override
-  int get hashCode {
-    return Object.hash(super.hashCode, null); // TODO
-  }
+  int get hashCode => Object.hash(super.hashCode, null); // TODO
 
   @override
   bool operator ==(Object other) {
@@ -30,14 +28,12 @@ sealed class Group extends Thing {
   }
 
   @override
-  String toString() {
-    return inspect("Group", toJson());
-  }
+  String toString() => inspect("Group", toJson());
 
   @override
-  Map<String, dynamic> toJson() {
-    return super.toJson()..addAll({}); // TODO
-  }
+  Map<String, dynamic> toJson() => super.toJson()
+    ..addAll({})
+    ..compact(); // TODO
 }
 
 final class _Group extends Group {

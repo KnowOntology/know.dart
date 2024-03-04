@@ -491,29 +491,27 @@ abstract final class PersonClass {
     seeAlso: {},
   );
 
-  static Set<Property> properties() {
-    return Set.unmodifiable({
-      honorific,
-      alias,
-      photo,
-      sex,
-      birth,
-      death,
-      parent,
-      father,
-      mother,
-      sibling,
-      partner,
-      spouse,
-      child,
-      colleague,
-      knows,
-      speaks,
-      nationality,
-      email,
-      phone,
-      link,
-      note,
-    });
-  }
+  static Set<Property> properties() => Set.unmodifiable({
+        honorific,
+        alias,
+        photo,
+        sex,
+        birth,
+        death,
+        parent,
+        father,
+        mother,
+        sibling,
+        partner,
+        spouse,
+        child,
+        colleague,
+        knows,
+        speaks,
+        nationality,
+        email,
+        phone,
+        link,
+        note,
+      });
 }

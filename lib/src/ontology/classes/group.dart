@@ -10,7 +10,5 @@ abstract final class GroupClass {
 
   // TODO
 
-  static Set<Property> properties() {
-    return Set.unmodifiable({});
-  }
+  static Set<Property> properties() => Set.unmodifiable({});
 }

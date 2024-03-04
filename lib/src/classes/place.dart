@@ -18,9 +18,7 @@ sealed class Place extends Thing {
   factory Place.fromJson(final Map<String, dynamic> json) = _Place.fromJson;
 
   @override
-  int get hashCode {
-    return Object.hash(super.hashCode, null); // TODO
-  }
+  int get hashCode => Object.hash(super.hashCode, null); // TODO
 
   @override
   bool operator ==(Object other) {
@@ -30,14 +28,12 @@ sealed class Place extends Thing {
   }
 
   @override
-  String toString() {
-    return inspect("Place", toJson());
-  }
+  String toString() => inspect("Place", toJson());
 
   @override
-  Map<String, dynamic> toJson() {
-    return super.toJson()..addAll({}); // TODO
-  }
+  Map<String, dynamic> toJson() => super.toJson()
+    ..addAll({})
+    ..compact(); // TODO
 }
 
 final class _Place extends Place {

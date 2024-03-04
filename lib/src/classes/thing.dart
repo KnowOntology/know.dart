@@ -23,9 +23,7 @@ abstract base class Thing {
   factory Thing.fromJson(final Map<String, dynamic> json) = _Thing.fromJson;
 
   @override
-  int get hashCode {
-    return Object.hash(id, name);
-  }
+  int get hashCode => Object.hash(id, name);
 
   @override
   bool operator ==(Object other) {
@@ -35,14 +33,12 @@ abstract base class Thing {
   }
 
   @override
-  String toString() {
-    return inspect("Thing", toJson());
-  }
+  String toString() => inspect("Thing", toJson());
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name?.toString(),
-      };
+      }.compact();
 }
 
 final class _Thing extends Thing {
