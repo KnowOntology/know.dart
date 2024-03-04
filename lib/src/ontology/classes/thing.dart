@@ -5,6 +5,7 @@ import '../property.dart' show Property;
 
 abstract final class ThingClass {
   static final Property id = Property(
+    domain: #Thing,
     id: #id,
     label: {
       L.ar: "معرف",
@@ -19,7 +20,7 @@ abstract final class ThingClass {
       L.uk: "Ідентифікатор",
     },
     comment: {},
-    domain: #Thing,
+    syntax: null,
     range: {#Literal},
     subPropertyOf: {},
     inverseOf: {},
@@ -33,6 +34,7 @@ abstract final class ThingClass {
   );
 
   static final Property name = Property(
+    domain: #Thing,
     id: #name,
     label: {
       L.ar: "اسم",
@@ -47,7 +49,7 @@ abstract final class ThingClass {
       L.uk: "Назва",
     },
     comment: {},
-    domain: #Thing,
+    syntax: null,
     range: {#Literal},
     subPropertyOf: {},
     inverseOf: {},

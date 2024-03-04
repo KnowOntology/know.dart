@@ -320,7 +320,7 @@ sealed class Person extends Thing {
 
   @override
   Map<String, dynamic> toJson() => super.toJson()
-    ..addAll({
+    ..addAll(<String, dynamic>{
       "honorific": honorific,
       "aliases": aliases.toList(),
       "photo": photo?.toString(),

@@ -9,6 +9,7 @@ abstract final class FileClass {
   static final name = ThingClass.name;
 
   static final Property size = Property(
+    domain: #File,
     id: #size,
     label: {
       L.ar: null,
@@ -23,7 +24,7 @@ abstract final class FileClass {
       L.uk: null,
     },
     comment: {},
-    domain: #File,
+    syntax: RegExp(r'^\d+$'),
     range: {},
     subPropertyOf: {},
     inverseOf: {},

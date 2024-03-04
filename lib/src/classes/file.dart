@@ -30,7 +30,7 @@ sealed class File extends Thing {
 
   @override
   Map<String, dynamic> toJson() => super.toJson()
-    ..addAll({
+    ..addAll(<String, dynamic>{
       "size": size,
     })
     ..compact();

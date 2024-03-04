@@ -9,6 +9,7 @@ abstract final class LinkClass {
   static final name = ThingClass.name;
 
   static final Property url = Property(
+    domain: #Link,
     id: #url,
     label: {
       L.ar: "محدد موقع الموارد الموحد",
@@ -23,7 +24,7 @@ abstract final class LinkClass {
       L.uk: "URL-адреси",
     },
     comment: {},
-    domain: #Link,
+    syntax: null, // TODO
     range: {},
     subPropertyOf: {},
     inverseOf: {},

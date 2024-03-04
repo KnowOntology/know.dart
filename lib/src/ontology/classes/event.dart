@@ -9,6 +9,7 @@ abstract final class EventClass {
   static final name = ThingClass.name;
 
   static final Property end = Property(
+    domain: #Event,
     id: #end,
     label: {
       L.ar: null,
@@ -23,7 +24,7 @@ abstract final class EventClass {
       L.uk: null,
     },
     comment: {},
-    domain: #Event,
+    syntax: null,
     range: {},
     subPropertyOf: {},
     inverseOf: {},
@@ -32,6 +33,7 @@ abstract final class EventClass {
   );
 
   static final Property place = Property(
+    domain: #Event,
     id: #place,
     label: {
       L.ar: null,
@@ -46,8 +48,8 @@ abstract final class EventClass {
       L.uk: null,
     },
     comment: {},
-    domain: #Event,
-    range: {},
+    syntax: null,
+    range: {#Place},
     subPropertyOf: {},
     inverseOf: {},
     sameAs: {},
@@ -55,6 +57,7 @@ abstract final class EventClass {
   );
 
   static final Property start = Property(
+    domain: #Event,
     id: #start,
     label: {
       L.ar: null,
@@ -69,7 +72,7 @@ abstract final class EventClass {
       L.uk: null,
     },
     comment: {},
-    domain: #Event,
+    syntax: null,
     range: {},
     subPropertyOf: {},
     inverseOf: {},

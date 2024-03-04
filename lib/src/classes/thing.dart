@@ -35,7 +35,7 @@ abstract base class Thing {
   @override
   String toString() => inspect("Thing", toJson());
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
         "id": id,
         "name": name?.toString(),
       }.compact();

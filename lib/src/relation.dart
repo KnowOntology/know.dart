@@ -29,7 +29,7 @@ final class Relation<S extends Thing, O extends Thing> {
     return inspect("Relation", toJson());
   }
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
         "predicate": _formatPredicate(predicate),
         "subject": subject?.toJson(),
         "object": object?.toJson(),

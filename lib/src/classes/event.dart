@@ -46,7 +46,7 @@ sealed class Event extends Thing {
 
   @override
   Map<String, dynamic> toJson() => super.toJson()
-    ..addAll({
+    ..addAll(<String, dynamic>{
       "start": start?.toString(),
       "end": end?.toString(),
       "place": place?.toJson(),

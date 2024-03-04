@@ -5,10 +5,11 @@ import '../inspect.dart' show inspect;
 import '../language.dart' show LanguageTag;
 
 class Property {
+  final Symbol domain;
   final Symbol id;
   final Map<LanguageTag, String?> label;
   final Map<LanguageTag, String?> comment;
-  final Symbol domain;
+  final RegExp? syntax;
   final Set<Symbol> range;
   final Set<Symbol> subPropertyOf;
   final Set<Symbol> inverseOf;
@@ -16,10 +17,11 @@ class Property {
   final Set<String> seeAlso;
 
   const Property(
-      {required this.id,
+      {this.domain = #Thing,
+      required this.id,
       this.label = const {},
       this.comment = const {},
-      this.domain = #Thing,
+      this.syntax,
       this.range = const {},
       this.subPropertyOf = const {},
       this.inverseOf = const {},
@@ -39,11 +41,12 @@ class Property {
   @override
   String toString() => inspect("Property", toJson());
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
+        'domain': domain.asString(),
         'id': id.asString(),
         'label': label.map((k, v) => MapEntry(k.toJson(), v)),
         'comment': comment.map((k, v) => MapEntry(k.toJson(), v)),
-        'domain': domain.asString(),
+        'syntax': syntax?.pattern,
         'range': range.map((e) => e.asString()).toList(),
         'subPropertyOf': subPropertyOf.map((e) => e.asString()).toList(),
         'inverseOf': inverseOf.map((e) => e.asString()).toList(),

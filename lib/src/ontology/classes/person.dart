@@ -9,6 +9,7 @@ abstract final class PersonClass {
   static final name = ThingClass.name;
 
   static final Property honorific = Property(
+    domain: #Person,
     id: #honorific,
     label: {
       L.ar: null,
@@ -23,8 +24,8 @@ abstract final class PersonClass {
       L.uk: null,
     },
     comment: {},
-    domain: #Person,
-    range: {},
+    syntax: null, // TODO
+    range: {#Literal},
     subPropertyOf: {},
     inverseOf: {},
     sameAs: {},
@@ -32,6 +33,7 @@ abstract final class PersonClass {
   );
 
   static final Property alias = Property(
+    domain: #Person,
     id: #alias,
     label: {
       L.ar: null,
@@ -46,8 +48,8 @@ abstract final class PersonClass {
       L.uk: null,
     },
     comment: {},
-    domain: #Person,
-    range: {},
+    syntax: null, // TODO
+    range: {#Literal},
     subPropertyOf: {#name},
     inverseOf: {},
     sameAs: {},
@@ -55,6 +57,7 @@ abstract final class PersonClass {
   );
 
   static final Property photo = Property(
+    domain: #Person,
     id: #photo,
     label: {
       L.ar: null,
@@ -69,8 +72,8 @@ abstract final class PersonClass {
       L.uk: null,
     },
     comment: {},
-    domain: #Person,
-    range: {},
+    syntax: null, // TODO
+    range: {#Literal},
     subPropertyOf: {#image},
     inverseOf: {},
     sameAs: {},
@@ -78,6 +81,7 @@ abstract final class PersonClass {
   );
 
   static final Property sex = Property(
+    domain: #Person,
     id: #sex,
     label: {
       L.ar: null,
@@ -92,7 +96,7 @@ abstract final class PersonClass {
       L.uk: null,
     },
     comment: {},
-    domain: #Person,
+    syntax: null,
     range: {},
     subPropertyOf: {},
     inverseOf: {},
@@ -101,6 +105,7 @@ abstract final class PersonClass {
   );
 
   static final Property birth = Property(
+    domain: #Person,
     id: #birth,
     label: {
       L.ar: null,
@@ -115,7 +120,7 @@ abstract final class PersonClass {
       L.uk: null,
     },
     comment: {},
-    domain: #Person,
+    syntax: null,
     range: {#Event},
     subPropertyOf: {},
     inverseOf: {},
@@ -124,6 +129,7 @@ abstract final class PersonClass {
   );
 
   static final Property death = Property(
+    domain: #Person,
     id: #death,
     label: {
       L.ar: null,
@@ -138,7 +144,7 @@ abstract final class PersonClass {
       L.uk: null,
     },
     comment: {},
-    domain: #Person,
+    syntax: null,
     range: {#Event},
     subPropertyOf: {},
     inverseOf: {},
@@ -147,6 +153,7 @@ abstract final class PersonClass {
   );
 
   static final Property parent = Property(
+    domain: #Person,
     id: #parent,
     label: {
       L.ar: null,
@@ -161,7 +168,7 @@ abstract final class PersonClass {
       L.uk: null,
     },
     comment: {},
-    domain: #Person,
+    syntax: null,
     range: {#Person},
     subPropertyOf: {#knows},
     inverseOf: {#child},
@@ -170,6 +177,7 @@ abstract final class PersonClass {
   );
 
   static final Property father = Property(
+    domain: #Person,
     id: #father,
     label: {
       L.ar: null,
@@ -184,7 +192,7 @@ abstract final class PersonClass {
       L.uk: null,
     },
     comment: {},
-    domain: #Person,
+    syntax: null,
     range: {#Person},
     subPropertyOf: {#parent},
     inverseOf: {},
@@ -193,6 +201,7 @@ abstract final class PersonClass {
   );
 
   static final Property mother = Property(
+    domain: #Person,
     id: #mother,
     label: {
       L.ar: null,
@@ -207,7 +216,7 @@ abstract final class PersonClass {
       L.uk: null,
     },
     comment: {},
-    domain: #Person,
+    syntax: null,
     range: {#Person},
     subPropertyOf: {#parent},
     inverseOf: {},
@@ -216,6 +225,7 @@ abstract final class PersonClass {
   );
 
   static final Property sibling = Property(
+    domain: #Person,
     id: #sibling,
     label: {
       L.ar: null,
@@ -230,7 +240,7 @@ abstract final class PersonClass {
       L.uk: null,
     },
     comment: {},
-    domain: #Person,
+    syntax: null,
     range: {#Person},
     subPropertyOf: {#knows},
     inverseOf: {#sibling},
@@ -239,6 +249,7 @@ abstract final class PersonClass {
   );
 
   static final Property partner = Property(
+    domain: #Person,
     id: #partner,
     label: {
       L.ar: null,
@@ -253,7 +264,7 @@ abstract final class PersonClass {
       L.uk: null,
     },
     comment: {},
-    domain: #Person,
+    syntax: null,
     range: {#Person},
     subPropertyOf: {#knows},
     inverseOf: {#partner},
@@ -262,6 +273,7 @@ abstract final class PersonClass {
   );
 
   static final Property spouse = Property(
+    domain: #Person,
     id: #spouse,
     label: {
       L.ar: null,
@@ -276,7 +288,7 @@ abstract final class PersonClass {
       L.uk: null,
     },
     comment: {},
-    domain: #Person,
+    syntax: null,
     range: {#Person},
     subPropertyOf: {#partner},
     inverseOf: {#spouse},
@@ -285,6 +297,7 @@ abstract final class PersonClass {
   );
 
   static final Property child = Property(
+    domain: #Person,
     id: #child,
     label: {
       L.ar: null,
@@ -299,7 +312,7 @@ abstract final class PersonClass {
       L.uk: null,
     },
     comment: {},
-    domain: #Person,
+    syntax: null,
     range: {#Person},
     subPropertyOf: {#knows},
     inverseOf: {#parent},
@@ -308,6 +321,7 @@ abstract final class PersonClass {
   );
 
   static final Property colleague = Property(
+    domain: #Person,
     id: #colleague,
     label: {
       L.ar: null,
@@ -322,7 +336,7 @@ abstract final class PersonClass {
       L.uk: null,
     },
     comment: {},
-    domain: #Person,
+    syntax: null,
     range: {#Person},
     subPropertyOf: {#knows},
     inverseOf: {#colleague},
@@ -331,6 +345,7 @@ abstract final class PersonClass {
   );
 
   static final Property knows = Property(
+    domain: #Person,
     id: #knows,
     label: {
       L.ar: null,
@@ -345,7 +360,7 @@ abstract final class PersonClass {
       L.uk: null,
     },
     comment: {},
-    domain: #Person,
+    syntax: null,
     range: {#Person},
     subPropertyOf: {#knows},
     inverseOf: {#colleague},
@@ -354,6 +369,7 @@ abstract final class PersonClass {
   );
 
   static final Property speaks = Property(
+    domain: #Person,
     id: #speaks,
     label: {
       L.ar: null,
@@ -368,8 +384,8 @@ abstract final class PersonClass {
       L.uk: null,
     },
     comment: {},
-    domain: #Person,
-    range: {},
+    syntax: null, // TODO
+    range: {#Literal},
     subPropertyOf: {},
     inverseOf: {},
     sameAs: {},
@@ -377,6 +393,7 @@ abstract final class PersonClass {
   );
 
   static final Property nationality = Property(
+    domain: #Person,
     id: #nationality,
     label: {
       L.ar: null,
@@ -391,8 +408,8 @@ abstract final class PersonClass {
       L.uk: null,
     },
     comment: {},
-    domain: #Person,
-    range: {},
+    syntax: null, // TODO
+    range: {#Literal},
     subPropertyOf: {},
     inverseOf: {},
     sameAs: {},
@@ -400,6 +417,7 @@ abstract final class PersonClass {
   );
 
   static final Property email = Property(
+    domain: #Person,
     id: #email,
     label: {
       L.ar: null,
@@ -414,8 +432,8 @@ abstract final class PersonClass {
       L.uk: null,
     },
     comment: {},
-    domain: #Person,
-    range: {},
+    syntax: null, // TODO
+    range: {#Literal},
     subPropertyOf: {},
     inverseOf: {},
     sameAs: {},
@@ -423,6 +441,7 @@ abstract final class PersonClass {
   );
 
   static final Property phone = Property(
+    domain: #Person,
     id: #phone,
     label: {
       L.ar: null,
@@ -437,8 +456,8 @@ abstract final class PersonClass {
       L.uk: null,
     },
     comment: {},
-    domain: #Person,
-    range: {},
+    syntax: null, // TODO
+    range: {#Literal},
     subPropertyOf: {},
     inverseOf: {},
     sameAs: {},
@@ -446,6 +465,7 @@ abstract final class PersonClass {
   );
 
   static final Property link = Property(
+    domain: #Person,
     id: #link,
     label: {
       L.ar: null,
@@ -460,8 +480,8 @@ abstract final class PersonClass {
       L.uk: null,
     },
     comment: {},
-    domain: #Person,
-    range: {},
+    syntax: null, // TODO
+    range: {#Literal},
     subPropertyOf: {},
     inverseOf: {},
     sameAs: {},
@@ -469,6 +489,7 @@ abstract final class PersonClass {
   );
 
   static final Property note = Property(
+    domain: #Person,
     id: #note,
     label: {
       L.ar: null,
@@ -483,7 +504,7 @@ abstract final class PersonClass {
       L.uk: null,
     },
     comment: {},
-    domain: #Person,
+    syntax: null,
     range: {},
     subPropertyOf: {},
     inverseOf: {},

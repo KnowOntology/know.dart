@@ -30,7 +30,7 @@ sealed class Link extends Thing {
 
   @override
   Map<String, dynamic> toJson() => super.toJson()
-    ..addAll({
+    ..addAll(<String, dynamic>{
       "url": url,
     })
     ..compact();
