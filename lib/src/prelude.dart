@@ -27,3 +27,21 @@ enum Sex {
 }
 
 Type typeOf<X>() => X;
+
+extension JSONCompact on Map<String, dynamic> {
+  Map<String, dynamic> compact() {
+    removeWhere((_, v) => v == null);
+    removeWhere((_, v) => v is List && v.isEmpty);
+    removeWhere((_, v) => v is Set && v.isEmpty);
+    removeWhere((_, v) => v is Map && v.isEmpty);
+    updateAll((_, v) => v is Map ? (v as Map<String, dynamic>).compact() : v);
+    return this;
+  }
+}
+
+extension SymbolAsString on Symbol {
+  String asString() {
+    final s = toString();
+    return s.substring("Symbol(\"".length, s.length - "\")".length);
+  }
+}
