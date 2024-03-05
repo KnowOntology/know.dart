@@ -5,7 +5,6 @@ library know;
 
 export 'src/classes.dart';
 export 'src/language.dart';
+export 'src/ontology.dart';
 export 'src/prelude.dart';
 export 'src/relation.dart';
-
-export 'src/ontology/classes.dart';
