@@ -4,11 +4,11 @@ import 'classes/thing.dart' show Thing;
 import 'inspect.dart' show inspect;
 
 final class Relation<S extends Thing, O extends Thing> {
-  Symbol predicate;
-  S? subject;
-  O? object;
+  final Symbol predicate;
+  final S? subject;
+  final O? object;
 
-  Relation(this.predicate, [this.subject, this.object]);
+  const Relation(this.predicate, [this.subject, this.object]);
 
   @override
   int get hashCode {

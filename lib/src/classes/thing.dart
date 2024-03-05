@@ -13,9 +13,9 @@ abstract base class Thing {
   Name? get name;
 
   @protected
-  Thing.init();
+  const Thing.init();
 
-  factory Thing({
+  const factory Thing({
     String? id,
     Name? name,
   }) = _Thing.of;
@@ -43,17 +43,17 @@ abstract base class Thing {
 
 final class _Thing extends Thing {
   @override
-  String? id;
+  final String? id;
 
   @override
-  Name? name;
+  final Name? name;
 
-  _Thing.of({
+  const _Thing.of({
     this.id,
     this.name,
   }) : super.init();
 
-  factory _Thing() => _Thing.of();
+  const factory _Thing() = _Thing.of;
 
   factory _Thing.fromJson(final Map<String, dynamic> json) {
     return Function.apply(

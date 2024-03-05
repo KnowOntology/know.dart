@@ -9,9 +9,9 @@ sealed class File extends Thing {
   /// The size of this file, if known.
   int? get size;
 
-  File._() : super.init();
+  const File._() : super.init();
 
-  factory File({String? id, Name? name, int? size}) = _File.of;
+  const factory File({String? id, Name? name, int? size}) = _File.of;
 
   factory File.fromJson(final Map<String, dynamic> json) = _File.fromJson;
 
@@ -38,21 +38,21 @@ sealed class File extends Thing {
 
 final class _File extends File {
   @override
-  String? id;
+  final String? id;
 
   @override
-  Name? name;
+  final Name? name;
 
   @override
-  int? size;
+  final int? size;
 
-  _File.of({
+  const _File.of({
     this.id,
     this.name,
     this.size,
   }) : super._();
 
-  factory _File() => _File.of();
+  const factory _File() = _File.of;
 
   factory _File.fromJson(final Map<String, dynamic> json) {
     return Function.apply(

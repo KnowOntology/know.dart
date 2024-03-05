@@ -8,9 +8,9 @@ import 'thing.dart' show Thing;
 sealed class Group extends Thing {
   // TODO: define properties
 
-  Group._() : super.init();
+  const Group._() : super.init();
 
-  factory Group({
+  const factory Group({
     String? id,
     Name? name,
   }) = _Group.of;
@@ -38,17 +38,17 @@ sealed class Group extends Thing {
 
 final class _Group extends Group {
   @override
-  String? id;
+  final String? id;
 
   @override
-  Name? name;
+  final Name? name;
 
-  _Group.of({
+  const _Group.of({
     this.id,
     this.name,
   }) : super._();
 
-  factory _Group() => _Group.of();
+  const factory _Group() = _Group.of;
 
   factory _Group.fromJson(final Map<String, dynamic> json) {
     return Function.apply(

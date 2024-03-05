@@ -233,9 +233,9 @@ sealed class Person extends Thing {
   /// ```
   Set<String> get notes;
 
-  Person._() : super.init();
+  const Person._() : super.init();
 
-  factory Person({
+  const factory Person({
     String? id,
     Name? name,
     String? honorific,
@@ -347,25 +347,25 @@ sealed class Person extends Thing {
 
 final class _Person extends Person {
   @override
-  String? id;
+  final String? id;
 
   @override
-  Name? name;
+  final Name? name;
 
   @override
-  String? honorific;
+  final String? honorific;
 
   @override
   Name? get alias => aliases.firstOrNull;
 
   @override
-  Set<Name> aliases;
+  final Set<Name> aliases;
 
   @override
-  IRI? photo;
+  final IRI? photo;
 
   @override
-  Sex? sex;
+  final Sex? sex;
 
   @override
   Age? get age => null; // TODO: calculate from this.birthdate
@@ -374,75 +374,75 @@ final class _Person extends Person {
   Date? get birthdate => birth?.start;
 
   @override
-  Event? birth;
+  final Event? birth;
 
   @override
-  Event? death;
+  final Event? death;
 
   @override
   Set<Person> get parents => {father, mother}.whereType<Person>().toSet();
 
   @override
-  Person? father;
+  final Person? father;
 
   @override
-  Person? mother;
+  final Person? mother;
 
   @override
-  Set<PersonRelation> siblings;
+  final Set<PersonRelation> siblings;
 
   @override
   Person? get partner => partners.firstOrNull?.object;
 
   @override
-  Set<PersonRelation> partners;
+  final Set<PersonRelation> partners;
 
   @override
   Person? get spouse => spouses.firstOrNull?.object;
 
   @override
-  Set<PersonRelation> spouses;
+  final Set<PersonRelation> spouses;
 
   @override
-  Set<PersonRelation> children;
+  final Set<PersonRelation> children;
 
   @override
-  Set<PersonRelation> colleagues;
+  final Set<PersonRelation> colleagues;
 
   @override
-  Set<PersonRelation> knows;
+  final Set<PersonRelation> knows;
 
   @override
-  Set<LanguageTag> speaks;
+  final Set<LanguageTag> speaks;
 
   @override
   CountryCode? get nationality => nationalities.firstOrNull;
 
   @override
-  Set<CountryCode> nationalities;
+  final Set<CountryCode> nationalities;
 
   @override
   Email? get email => emails.firstOrNull;
 
   @override
-  Set<Email> emails;
+  final Set<Email> emails;
 
   @override
   Phone? get phone => phones.firstOrNull;
 
   @override
-  Set<Phone> phones;
+  final Set<Phone> phones;
 
   @override
   IRI? get link => links.firstOrNull;
 
   @override
-  Set<IRI> links;
+  final Set<IRI> links;
 
   @override
-  Set<String> notes;
+  final Set<String> notes;
 
-  _Person.of(
+  const _Person.of(
       {this.id,
       this.name,
       this.honorific,
@@ -467,7 +467,7 @@ final class _Person extends Person {
       this.notes = const {}})
       : super._();
 
-  factory _Person() => _Person.of();
+  const factory _Person() = _Person.of;
 
   factory _Person.fromJson(final Map<String, dynamic> json) {
     return Function.apply(_Person.of, [], json.map((k, v) {

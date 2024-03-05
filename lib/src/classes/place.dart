@@ -8,9 +8,9 @@ import 'thing.dart' show Thing;
 sealed class Place extends Thing {
   // TODO: define properties
 
-  Place._() : super.init();
+  const Place._() : super.init();
 
-  factory Place({
+  const factory Place({
     String? id,
     Name? name,
   }) = _Place.of;
@@ -38,17 +38,17 @@ sealed class Place extends Thing {
 
 final class _Place extends Place {
   @override
-  String? id;
+  final String? id;
 
   @override
-  Name? name;
+  final Name? name;
 
-  _Place.of({
+  const _Place.of({
     this.id,
     this.name,
   }) : super._();
 
-  factory _Place() => _Place.of();
+  const factory _Place() = _Place.of;
 
   factory _Place.fromJson(final Map<String, dynamic> json) {
     return Function.apply(

@@ -16,9 +16,9 @@ sealed class Event extends Thing {
   /// The place where this event occurs, if any.
   Place? get place;
 
-  Event._() : super.init();
+  const Event._() : super.init();
 
-  factory Event({
+  const factory Event({
     String? id,
     Name? name,
     Date? start,
@@ -56,21 +56,21 @@ sealed class Event extends Thing {
 
 final class _Event extends Event {
   @override
-  String? id;
+  final String? id;
 
   @override
-  Name? name;
+  final Name? name;
 
   @override
-  Date? start;
+  final Date? start;
 
   @override
-  Date? end;
+  final Date? end;
 
   @override
-  Place? place;
+  final Place? place;
 
-  _Event.of({
+  const _Event.of({
     this.id,
     this.name,
     this.start,
@@ -78,7 +78,7 @@ final class _Event extends Event {
     this.place,
   }) : super._();
 
-  factory _Event() => _Event.of();
+  const factory _Event() = _Event.of;
 
   factory _Event.fromJson(final Map<String, dynamic> json) {
     return Function.apply(
