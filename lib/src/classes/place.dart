@@ -28,6 +28,12 @@ sealed class Place extends Thing {
   }
 
   @override
+  dynamic operator [](final Symbol propertyID) => switch (propertyID) {
+        // TODO
+        _ => super[propertyID],
+      };
+
+  @override
   String toString() => inspect("Place", toJson());
 
   @override

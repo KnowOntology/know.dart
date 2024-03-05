@@ -26,6 +26,12 @@ sealed class File extends Thing {
   }
 
   @override
+  dynamic operator [](final Symbol propertyID) => switch (propertyID) {
+        #size => size,
+        _ => super[propertyID],
+      };
+
+  @override
   String toString() => inspect("File", toJson());
 
   @override

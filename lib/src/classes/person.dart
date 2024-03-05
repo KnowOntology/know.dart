@@ -316,6 +316,51 @@ sealed class Person extends Thing {
   }
 
   @override
+  dynamic operator [](final Symbol propertyID) => switch (propertyID) {
+        #honorific => honorific,
+        #alias => alias,
+        #aliases => aliases,
+        #photo => photo,
+        #isMale => isMale,
+        #isFemale => isFemale,
+        #sex => sex,
+        #isChild => isChild,
+        #isAdult => isAdult,
+        #age => age,
+        #birthdate => birthdate,
+        #birth => birth,
+        #death => death,
+        #parents => parents,
+        #father => father,
+        #mother => mother,
+        #hasSiblings => hasSiblings,
+        #siblings => siblings,
+        #hasPartner => hasPartner,
+        #partner => partner,
+        #partners => partners,
+        #hasSpouse => hasSpouse,
+        #spouse => spouse,
+        #spouses => spouses,
+        #hasChildren => hasChildren,
+        #children => children,
+        #hasColleagues => hasColleagues,
+        #colleagues => colleagues,
+        #knows => knows,
+        #speaksEnglish => speaksEnglish,
+        #speaks => speaks,
+        #nationality => nationality,
+        #nationalities => nationalities,
+        #email => email,
+        #emails => emails,
+        #phone => phone,
+        #phones => phones,
+        #link => link,
+        #links => links,
+        #notes => notes,
+        _ => super[propertyID],
+      };
+
+  @override
   String toString() => inspect("Person", toJson());
 
   @override

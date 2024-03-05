@@ -42,6 +42,14 @@ sealed class Event extends Thing {
   }
 
   @override
+  dynamic operator [](final Symbol propertyID) => switch (propertyID) {
+        #start => start,
+        #end => end,
+        #place => place,
+        _ => super[propertyID],
+      };
+
+  @override
   String toString() => inspect("Event", toJson());
 
   @override

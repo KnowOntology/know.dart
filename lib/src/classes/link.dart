@@ -26,6 +26,12 @@ sealed class Link extends Thing {
   }
 
   @override
+  dynamic operator [](final Symbol propertyID) => switch (propertyID) {
+        #url => url,
+        _ => super[propertyID],
+      };
+
+  @override
   String toString() => inspect("Link", toJson());
 
   @override

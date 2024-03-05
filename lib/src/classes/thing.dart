@@ -32,12 +32,14 @@ abstract base class Thing {
     return id == other.id && name == other.name;
   }
 
+  dynamic operator [](final Symbol propertyID) => switch (propertyID) {
+        #id => id,
+        #name => name,
+        _ => null,
+      };
+
   @override
   String toString() => inspect("Thing", toJson());
-
-  dynamic operator [](final String propertyID) {
-    return toJson()[propertyID];
-  }
 
   Map<String, dynamic> toJson() => <String, dynamic>{
         "id": id,
