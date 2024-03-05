@@ -1,5 +1,7 @@
 // This is free and unencumbered software released into the public domain.
 
+import './prelude.dart';
+
 typedef L = LanguageTag;
 
 /// IETF BCP 47 language tag.
@@ -37,6 +39,9 @@ enum LanguageTag {
   final String? labelNative;
 
   const LanguageTag(this.tag, [this.labelEnglish, this.labelNative]);
+
+  factory LanguageTag.fromSymbol(final Symbol tag) =>
+      LanguageTag.fromString(tag.asString());
 
   factory LanguageTag.fromString(final String tag) {
     for (final lang in LanguageTag.values) {

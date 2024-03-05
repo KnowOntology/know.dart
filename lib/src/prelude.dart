@@ -11,16 +11,16 @@ typedef Date = String; // TODO
 /// A valid email address.
 typedef Email = String;
 
-/// Internationalized Resource Identifier (IRI).
+/// An Internationalized Resource Identifier (IRI).
 typedef IRI = String;
 
 /// A human-readable name for something.
 typedef Name = String;
 
-/// SS7 international phone number.
+/// An SS7 international phone number.
 typedef Phone = String;
 
-/// Biological sex for sexually dimorphic species.
+/// A biological sex for sexually dimorphic species.
 enum Sex {
   male,
   female,
@@ -28,6 +28,7 @@ enum Sex {
 
 Type typeOf<X>() => X;
 
+/// Implementation of `Map<String, dynamic>#compact()`.
 extension JSONCompact on Map<String, dynamic> {
   Map<String, dynamic> compact() {
     removeWhere((_, v) => v == null);
@@ -52,6 +53,7 @@ extension JSONCompact on Map<String, dynamic> {
   }
 }
 
+/// Implementation of `Symbol#asString()`.
 extension SymbolAsString on Symbol {
   String asString() {
     final s = toString();
