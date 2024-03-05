@@ -20,8 +20,7 @@ abstract final class ThingClass {
       L.uk: "Ідентифікатор",
     },
     comment: {},
-    syntax: null,
-    range: {#Literal},
+    range: #string,
     subPropertyOf: {},
     inverseOf: {},
     sameAs: {
@@ -49,8 +48,7 @@ abstract final class ThingClass {
       L.uk: "Назва",
     },
     comment: {},
-    syntax: null,
-    range: {#Literal},
+    range: #string,
     subPropertyOf: {},
     inverseOf: {},
     sameAs: {

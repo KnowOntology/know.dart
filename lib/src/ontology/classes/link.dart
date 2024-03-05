@@ -24,8 +24,7 @@ abstract final class LinkClass {
       L.uk: "URL-адреси",
     },
     comment: {},
-    syntax: null, // TODO
-    range: {},
+    range: #iri,
     subPropertyOf: {},
     inverseOf: {},
     sameAs: {},
