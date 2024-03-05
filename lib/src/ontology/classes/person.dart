@@ -4,6 +4,7 @@ import '../../language.dart' show L;
 import '../property.dart' show Property;
 import 'thing.dart' show ThingClass;
 
+/// Property metadata for [Person].
 abstract final class PersonClass {
   static final id = ThingClass.id;
   static final name = ThingClass.name;
@@ -24,7 +25,7 @@ abstract final class PersonClass {
       L.uk: null,
     },
     comment: {},
-    range: #string,
+    range: #text,
     subPropertyOf: {},
     inverseOf: {},
     sameAs: {},
@@ -47,7 +48,7 @@ abstract final class PersonClass {
       L.uk: null,
     },
     comment: {},
-    range: #string,
+    range: #text,
     subPropertyOf: {#name},
     inverseOf: {},
     sameAs: {},
@@ -484,7 +485,7 @@ abstract final class PersonClass {
       L.uk: null,
     },
     comment: {},
-    range: #string,
+    range: #text,
     subPropertyOf: {},
     inverseOf: {},
     sameAs: {},

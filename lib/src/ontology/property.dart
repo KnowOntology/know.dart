@@ -4,6 +4,10 @@ import '../prelude.dart';
 import '../inspect.dart' show inspect;
 import '../language.dart' show LanguageTag;
 
+/// A property in the ontology.
+///
+/// See: https://www.w3.org/TR/rdf12-concepts/#dfn-property
+/// See: https://www.w3.org/TR/rdf12-schema/#ch_property
 class Property {
   final Symbol domain;
   final Symbol id;
@@ -12,7 +16,7 @@ class Property {
   final Symbol? range;
   final Set<Symbol> subPropertyOf;
   final Set<Symbol> inverseOf;
-  final Set<String> sameAs;
+  final Set<(Symbol, Symbol)> sameAs;
   final Set<String> seeAlso;
 
   const Property(

@@ -4,6 +4,7 @@
 import '../property.dart' show Property;
 import 'thing.dart' show ThingClass;
 
+/// Property metadata for [Place].
 abstract final class PlaceClass {
   static final id = ThingClass.id;
   static final name = ThingClass.name;

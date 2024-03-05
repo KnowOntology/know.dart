@@ -4,6 +4,7 @@ import '../../language.dart' show L;
 import '../property.dart' show Property;
 import 'thing.dart' show ThingClass;
 
+/// Property metadata for [File].
 abstract final class FileClass {
   static final id = ThingClass.id;
   static final name = ThingClass.name;

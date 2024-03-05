@@ -6,7 +6,7 @@ import 'package:meta/meta.dart' show protected;
 
 /// A thing.
 abstract base class Thing {
-  /// An opaque, unique identifier for this thing, if any.
+  /// A unique, opaque identifier for this thing, if any.
   String? get id;
 
   /// A human-legible name for this thing, if any.

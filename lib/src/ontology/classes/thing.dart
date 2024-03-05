@@ -3,6 +3,7 @@
 import '../../language.dart' show L;
 import '../property.dart' show Property;
 
+/// Property metadata for [Thing].
 abstract final class ThingClass {
   static final Property id = Property(
     domain: #Thing,
@@ -20,11 +21,11 @@ abstract final class ThingClass {
       L.uk: "Ідентифікатор",
     },
     comment: {},
-    range: #string,
+    range: #text,
     subPropertyOf: {},
     inverseOf: {},
     sameAs: {
-      "dc:identifier",
+      (#dc, #identifier),
     },
     seeAlso: {
       "https://en.wiktionary.org/wiki/identifier",
@@ -48,12 +49,12 @@ abstract final class ThingClass {
       L.uk: "Назва",
     },
     comment: {},
-    range: #string,
+    range: #text,
     subPropertyOf: {},
     inverseOf: {},
     sameAs: {
-      "foaf:name",
-      "schema:name",
+      (#foaf, #name),
+      (#schema, #name),
     },
     seeAlso: {
       "https://en.wiktionary.org/wiki/name",

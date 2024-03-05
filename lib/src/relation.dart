@@ -3,6 +3,10 @@
 import 'classes/thing.dart' show Thing;
 import 'inspect.dart' show inspect;
 
+/// A relationship between two things.
+///
+/// See: https://www.w3.org/TR/rdf12-concepts/#section-triples
+/// See: https://www.w3.org/TR/rdf12-schema/#ch_statement
 final class Relation<S extends Thing, O extends Thing> {
   final Symbol predicate;
   final S? subject;

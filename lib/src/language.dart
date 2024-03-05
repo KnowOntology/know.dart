@@ -3,6 +3,10 @@
 typedef L = LanguageTag;
 
 /// IETF BCP 47 language tag.
+///
+/// See: https://www.w3.org/TR/rdf12-concepts/#dfn-language-tag
+/// See: https://www.w3.org/TR/xmlschema11-2/#language
+/// See: https://www.rfc-editor.org/rfc/rfc5646.html
 enum LanguageTag {
   ar("ar", "Arabic", "العربية"),
   bn("bn", "Bengali", "বাংলা"),
@@ -28,6 +32,12 @@ enum LanguageTag {
   vi("vi", "Vietnamese", "Tiếng Việt"),
   zh("zh", "Chinese", "中文");
 
+  final String tag;
+  final String? labelEnglish;
+  final String? labelNative;
+
+  const LanguageTag(this.tag, [this.labelEnglish, this.labelNative]);
+
   factory LanguageTag.fromString(final String tag) {
     for (final lang in LanguageTag.values) {
       if (lang.tag == tag) {
@@ -40,10 +50,4 @@ enum LanguageTag {
   factory LanguageTag.fromJson(final String tag) = LanguageTag.fromString;
 
   String toJson() => tag;
-
-  const LanguageTag(this.tag, [this.labelEnglish, this.labelNative]);
-
-  final String tag;
-  final String? labelEnglish;
-  final String? labelNative;
 }
