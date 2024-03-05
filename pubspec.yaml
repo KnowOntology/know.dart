@@ -1,7 +1,7 @@
 # See: https://dart.dev/tools/pub/pubspec
 ---
 name: know
-version: 0.0.8
+version: 0.0.9
 description: The Know Framework for Dart
 homepage: https://know.dev
 repository: https://github.com/HaltiaAI/know.dart
