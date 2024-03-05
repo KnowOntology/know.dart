@@ -35,6 +35,10 @@ abstract base class Thing {
   @override
   String toString() => inspect("Thing", toJson());
 
+  dynamic operator [](final String propertyID) {
+    return toJson()[propertyID];
+  }
+
   Map<String, dynamic> toJson() => <String, dynamic>{
         "id": id,
         "name": name?.toString(),
