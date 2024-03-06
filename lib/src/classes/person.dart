@@ -225,6 +225,9 @@ sealed class Person extends Thing {
   Set<IRI> get links;
 
   /// Any supplementary notes about this person.
+  String? get note => notes.isNotEmpty ? notes.join("\n") : null;
+
+  /// Any supplementary notes about this person.
   ///
   /// ```dart
   /// for (var note in person.notes) {
@@ -356,6 +359,7 @@ sealed class Person extends Thing {
         #phones => phones,
         #link => link,
         #links => links,
+        #note => note,
         #notes => notes,
         _ => super[propertyID],
       };
