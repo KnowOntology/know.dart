@@ -40,6 +40,19 @@ sealed class Link extends Thing {
       "url": url,
     })
     ..compact();
+
+  /// Creates a new [Link] from this one by updating individual properties.
+  @override
+  Link copyWith({
+    String? id,
+    Name? name,
+    IRI? url,
+  }) =>
+      Link(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        url: url ?? this.url,
+      );
 }
 
 final class _Link extends Link {

@@ -392,6 +392,57 @@ sealed class Person extends Thing {
       "notes": notes.map((e) => e.toString()).toList(),
     })
     ..compact();
+
+  /// Creates a new [Person] from this one by updating individual properties.
+  @override
+  Person copyWith({
+    String? id,
+    Name? name,
+    String? honorific,
+    Set<Name>? aliases,
+    IRI? photo,
+    Sex? sex,
+    Event? birth,
+    Event? death,
+    Person? father,
+    Person? mother,
+    Set<PersonRelation>? siblings,
+    Set<PersonRelation>? partners,
+    Set<PersonRelation>? spouses,
+    Set<PersonRelation>? children,
+    Set<PersonRelation>? colleagues,
+    Set<PersonRelation>? knows,
+    Set<LanguageTag>? speaks,
+    Set<CountryCode>? nationalities,
+    Set<Email>? emails,
+    Set<Phone>? phones,
+    Set<IRI>? links,
+    Set<String>? notes,
+  }) =>
+      Person(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        honorific: honorific ?? this.honorific,
+        aliases: aliases ?? this.aliases,
+        photo: photo ?? this.photo,
+        sex: sex ?? this.sex,
+        birth: birth ?? this.birth,
+        death: death ?? this.death,
+        father: father ?? this.father,
+        mother: mother ?? this.mother,
+        siblings: siblings ?? this.siblings,
+        partners: partners ?? this.partners,
+        spouses: spouses ?? this.spouses,
+        children: children ?? this.children,
+        colleagues: colleagues ?? this.colleagues,
+        knows: knows ?? this.knows,
+        speaks: speaks ?? this.speaks,
+        nationalities: nationalities ?? this.nationalities,
+        emails: emails ?? this.emails,
+        phones: phones ?? this.phones,
+        links: links ?? this.links,
+        notes: notes ?? this.notes,
+      );
 }
 
 final class _Person extends Person {

@@ -45,6 +45,16 @@ abstract base class Thing {
         "id": id,
         "name": name?.toString(),
       }.compact();
+
+  /// Creates a new [Thing] from this one by updating individual properties.
+  Thing copyWith({
+    String? id,
+    Name? name,
+  }) =>
+      Thing(
+        id: id ?? this.id,
+        name: name ?? this.name,
+      );
 }
 
 final class _Thing extends Thing {

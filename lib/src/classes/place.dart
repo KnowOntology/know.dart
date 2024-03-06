@@ -40,6 +40,17 @@ sealed class Place extends Thing {
   Map<String, dynamic> toJson() => super.toJson()
     ..addAll(<String, dynamic>{}) // TODO
     ..compact();
+
+  /// Creates a new [Place] from this one by updating individual properties.
+  @override
+  Place copyWith({
+    String? id,
+    Name? name,
+  }) =>
+      Place(
+        id: id ?? this.id,
+        name: name ?? this.name,
+      );
 }
 
 final class _Place extends Place {

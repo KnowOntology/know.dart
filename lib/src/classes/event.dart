@@ -60,6 +60,23 @@ sealed class Event extends Thing {
       "place": place?.toJson(),
     })
     ..compact();
+
+  /// Creates a new [Event] from this one by updating individual properties.
+  @override
+  Event copyWith({
+    String? id,
+    Name? name,
+    Date? start,
+    Date? end,
+    Place? place,
+  }) =>
+      Event(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        start: start ?? this.start,
+        end: end ?? this.end,
+        place: place ?? this.place,
+      );
 }
 
 final class _Event extends Event {

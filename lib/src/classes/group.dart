@@ -40,6 +40,17 @@ sealed class Group extends Thing {
   Map<String, dynamic> toJson() => super.toJson()
     ..addAll(<String, dynamic>{}) // TODO
     ..compact();
+
+  /// Creates a new [Group] from this one by updating individual properties.
+  @override
+  Group copyWith({
+    String? id,
+    Name? name,
+  }) =>
+      Group(
+        id: id ?? this.id,
+        name: name ?? this.name,
+      );
 }
 
 final class _Group extends Group {

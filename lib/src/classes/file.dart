@@ -40,6 +40,19 @@ sealed class File extends Thing {
       "size": size,
     })
     ..compact();
+
+  /// Creates a new [File] from this one by updating individual properties.
+  @override
+  File copyWith({
+    String? id,
+    Name? name,
+    int? size,
+  }) =>
+      File(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        size: size ?? this.size,
+      );
 }
 
 final class _File extends File {
