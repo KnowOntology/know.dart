@@ -2,7 +2,7 @@
 
 import '../prelude.dart';
 import '../inspect.dart' show inspect;
-import '../language.dart' show LanguageTag;
+import '../language.dart' show L, LanguageTag;
 import 'datatype.dart' show Datatype;
 
 /// A property in the ontology.
@@ -57,4 +57,10 @@ class Property {
         'sameAs': sameAs.toList(),
         'seeAlso': seeAlso.toList(),
       }.compact();
+
+  String labelForLangCode(final String langCode) =>
+      labelForLangTag(LanguageTag.fromString(langCode));
+
+  String labelForLangTag(final LanguageTag langTag) =>
+      label[langTag] ?? label[L.en] ?? id.asString();
 }
