@@ -3,6 +3,7 @@
 import '../prelude.dart';
 import '../inspect.dart' show inspect;
 import '../language.dart' show LanguageTag;
+import 'datatype.dart' show Datatype;
 
 /// A property in the ontology.
 ///
@@ -29,6 +30,8 @@ class Property {
       this.inverseOf = const {},
       this.sameAs = const {},
       this.seeAlso = const {}});
+
+  Datatype? get datatype => range != null ? Datatype.fromSymbol(range!) : null;
 
   @override
   int get hashCode => Object.hash(domain, id);
