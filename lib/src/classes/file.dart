@@ -13,7 +13,7 @@ sealed class File extends Thing {
 
   const File._() : super.init();
 
-  const factory File({Term? key, String? id, Name? name, int? size}) = _File.of;
+  factory File({Term? key, String? id, Name? name, int? size}) = _File.of;
 
   factory File.fromJson(final Map<String, dynamic> json) = _File.fromJson;
 
@@ -61,7 +61,7 @@ sealed class File extends Thing {
 
 final class _File extends File {
   @override
-  final Term? key;
+  final Term key;
 
   @override
   final String? id;
@@ -72,14 +72,14 @@ final class _File extends File {
   @override
   final int? size;
 
-  const _File.of({
-    this.key,
+  _File.of({
+    Term? key,
     this.id,
     this.name,
     this.size,
-  }) : super._();
+  }) : key = key ?? Term.genid(), super._();
 
-  const factory _File() = _File.of;
+  factory _File() = _File.of;
 
   factory _File.fromJson(final Map<String, dynamic> json) {
     return Function.apply(

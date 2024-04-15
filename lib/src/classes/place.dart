@@ -12,7 +12,7 @@ sealed class Place extends Thing {
 
   const Place._() : super.init();
 
-  const factory Place({
+  factory Place({
     Term? key,
     String? id,
     Name? name,
@@ -60,7 +60,7 @@ sealed class Place extends Thing {
 
 final class _Place extends Place {
   @override
-  final Term? key;
+  final Term key;
 
   @override
   final String? id;
@@ -68,13 +68,13 @@ final class _Place extends Place {
   @override
   final Name? name;
 
-  const _Place.of({
-    this.key,
+  _Place.of({
+    Term? key,
     this.id,
     this.name,
-  }) : super._();
+  }) : key = key ?? Term.genid(), super._();
 
-  const factory _Place() = _Place.of;
+  factory _Place() = _Place.of;
 
   factory _Place.fromJson(final Map<String, dynamic> json) {
     return Function.apply(

@@ -13,7 +13,7 @@ sealed class Link extends Thing {
 
   const Link._() : super.init();
 
-  const factory Link({Term? key, String? id, Name? name, IRI? url}) = _Link.of;
+  factory Link({Term? key, String? id, Name? name, IRI? url}) = _Link.of;
 
   factory Link.fromJson(final Map<String, dynamic> json) = _Link.fromJson;
 
@@ -61,7 +61,7 @@ sealed class Link extends Thing {
 
 final class _Link extends Link {
   @override
-  final Term? key;
+  final Term key;
 
   @override
   final String? id;
@@ -72,14 +72,14 @@ final class _Link extends Link {
   @override
   final IRI? url;
 
-  const _Link.of({
-    this.key,
+  _Link.of({
+    Term? key,
     this.id,
     this.name,
     this.url,
-  }) : super._();
+  }) : key = key ?? Term.genid(), super._();
 
-  const factory _Link() = _Link.of;
+  factory _Link() = _Link.of;
 
   factory _Link.fromJson(final Map<String, dynamic> json) {
     return Function.apply(

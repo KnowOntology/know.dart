@@ -460,7 +460,7 @@ sealed class Person extends Thing {
 
 final class _Person extends Person {
   @override
-  final Term? key;
+  final Term key;
 
   @override
   final String? id;
@@ -559,7 +559,7 @@ final class _Person extends Person {
   final Set<String> notes;
 
   _Person.of(
-      {this.key,
+      {Term? key,
       this.id,
       this.name,
       this.honorific,
@@ -582,7 +582,8 @@ final class _Person extends Person {
       this.phones = const {},
       this.links = const {},
       this.notes = const {}})
-      : super._();
+      : key = key ?? Term.genid(),
+        super._();
 
   factory _Person() = _Person.of;
 

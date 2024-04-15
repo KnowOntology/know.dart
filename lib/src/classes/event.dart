@@ -20,7 +20,7 @@ sealed class Event extends Thing {
 
   const Event._() : super.init();
 
-  const factory Event({
+  factory Event({
     Term? key,
     String? id,
     Name? name,
@@ -86,7 +86,7 @@ sealed class Event extends Thing {
 
 final class _Event extends Event {
   @override
-  final Term? key;
+  final Term key;
 
   @override
   final String? id;
@@ -103,16 +103,16 @@ final class _Event extends Event {
   @override
   final Place? place;
 
-  const _Event.of({
-    this.key,
+  _Event.of({
+    Term? key,
     this.id,
     this.name,
     this.start,
     this.end,
     this.place,
-  }) : super._();
+  }) : key = key ?? Term.genid(), super._();
 
-  const factory _Event() = _Event.of;
+  factory _Event() = _Event.of;
 
   factory _Event.fromJson(final Map<String, dynamic> json) {
     return Function.apply(

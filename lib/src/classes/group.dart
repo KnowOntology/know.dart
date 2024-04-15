@@ -12,7 +12,7 @@ sealed class Group extends Thing {
 
   const Group._() : super.init();
 
-  const factory Group({
+  factory Group({
     Term? key,
     String? id,
     Name? name,
@@ -60,7 +60,7 @@ sealed class Group extends Thing {
 
 final class _Group extends Group {
   @override
-  final Term? key;
+  final Term key;
 
   @override
   final String? id;
@@ -68,13 +68,13 @@ final class _Group extends Group {
   @override
   final Name? name;
 
-  const _Group.of({
-    this.key,
+  _Group.of({
+    Term? key,
     this.id,
     this.name,
-  }) : super._();
+  }) : key = key ?? Term.genid(), super._();
 
-  const factory _Group() = _Group.of;
+  factory _Group() = _Group.of;
 
   factory _Group.fromJson(final Map<String, dynamic> json) {
     return Function.apply(

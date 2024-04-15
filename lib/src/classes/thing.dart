@@ -9,7 +9,7 @@ import '../inspect.dart' show inspect;
 /// A thing.
 abstract base class Thing {
   /// The key for this thing.
-  Term? get key;
+  Term get key;
 
   /// A unique, opaque identifier for this thing, if any.
   String? get id;
@@ -20,7 +20,7 @@ abstract base class Thing {
   @protected
   const Thing.init();
 
-  const factory Thing({
+  factory Thing({
     Term? key,
     String? id,
     Name? name,
@@ -51,12 +51,12 @@ abstract base class Thing {
   String toString() => inspect("Thing", toJson());
 
   Set<Fact> toFacts() => <Fact?>[
-        key != null && id != null ? Fact.spo(key!, #id, id!) : null,
-        key != null && name != null ? Fact.spo(key!, #name, name!) : null,
+        id != null ? Fact.spo(key, #id, id!) : null,
+        name != null ? Fact.spo(key, #name, name!) : null,
       ].toFacts();
 
   Map<String, dynamic> toJson() => <String, dynamic>{
-        "key": key?.toString(),
+        "key": key.valueAsString,
         "id": id,
         "name": name?.toString(),
       }.compact();
@@ -76,7 +76,7 @@ abstract base class Thing {
 
 final class _Thing extends Thing {
   @override
-  final Term? key;
+  final Term key;
 
   @override
   final String? id;
@@ -84,13 +84,15 @@ final class _Thing extends Thing {
   @override
   final Name? name;
 
-  const _Thing.of({
-    this.key,
+  _Thing.of({
+    Term? key,
     this.id,
     this.name,
-  }) : super.init();
+  })
+  : key = key ?? Term.genid(),
+    super.init();
 
-  const factory _Thing() = _Thing.of;
+  factory _Thing() = _Thing.of;
 
   factory _Thing.fromFacts(final Iterable<Fact> facts) {
     if (facts.isEmpty) return _Thing();
