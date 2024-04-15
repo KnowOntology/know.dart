@@ -77,12 +77,16 @@ final class _File extends File {
     this.id,
     this.name,
     this.size,
-  }) : key = key ?? Term.genid(), super._();
+  })  : key = key ?? Term.genid(),
+        super._();
 
   factory _File() = _File.of;
 
   factory _File.fromJson(final Map<String, dynamic> json) {
-    return Function.apply(
-        _File.of, [], json.map((k, v) => MapEntry(Symbol(k), v)));
+    return Function.apply(_File.of, [], json.map((k, v) {
+      final key = Symbol(k);
+      final val = switch (key) { #key => Term.parse(v), _ => v };
+      return MapEntry(key, val);
+    }));
   }
 }

@@ -110,12 +110,16 @@ final class _Event extends Event {
     this.start,
     this.end,
     this.place,
-  }) : key = key ?? Term.genid(), super._();
+  })  : key = key ?? Term.genid(),
+        super._();
 
   factory _Event() = _Event.of;
 
   factory _Event.fromJson(final Map<String, dynamic> json) {
-    return Function.apply(
-        _Event.of, [], json.map((k, v) => MapEntry(Symbol(k), v)));
+    return Function.apply(_Event.of, [], json.map((k, v) {
+      final key = Symbol(k);
+      final val = switch (key) { #key => Term.parse(v), _ => v };
+      return MapEntry(key, val);
+    }));
   }
 }

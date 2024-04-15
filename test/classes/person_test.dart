@@ -1,10 +1,12 @@
 // This is free and unencumbered software released into the public domain.
 
+import 'package:knf/knf.dart';
 import 'package:know/know.dart';
 import 'package:test/test.dart';
 
 void main() {
   final person = Person(
+    key: Term.allusion("person"),
     id: "1",
     name: "Thomas Anderson",
     honorific: "Mr.",
@@ -37,6 +39,7 @@ void main() {
   );
 
   final personJson = {
+    "key": "person",
     "id": "1",
     "name": "Thomas Anderson",
     "honorific": "Mr.",

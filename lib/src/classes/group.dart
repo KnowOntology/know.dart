@@ -72,12 +72,16 @@ final class _Group extends Group {
     Term? key,
     this.id,
     this.name,
-  }) : key = key ?? Term.genid(), super._();
+  })  : key = key ?? Term.genid(),
+        super._();
 
   factory _Group() = _Group.of;
 
   factory _Group.fromJson(final Map<String, dynamic> json) {
-    return Function.apply(
-        _Group.of, [], json.map((k, v) => MapEntry(Symbol(k), v)));
+    return Function.apply(_Group.of, [], json.map((k, v) {
+      final key = Symbol(k);
+      final val = switch (key) { #key => Term.parse(v), _ => v };
+      return MapEntry(key, val);
+    }));
   }
 }

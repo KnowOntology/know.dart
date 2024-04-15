@@ -631,6 +631,7 @@ final class _Person extends Person {
     return Function.apply(_Person.of, [], json.map((k, v) {
       final key = Symbol(k);
       final val = switch (key) {
+        #key => Term.parse(v),
         #aliases => (v as List<dynamic>).cast<Name>().toSet(),
         #sex => Sex.values.firstWhereOrNull((e) => e.name == v),
         #birth => v != null ? Event.fromJson(v) : null,

@@ -88,9 +88,8 @@ final class _Thing extends Thing {
     Term? key,
     this.id,
     this.name,
-  })
-  : key = key ?? Term.genid(),
-    super.init();
+  })  : key = key ?? Term.genid(),
+        super.init();
 
   factory _Thing() = _Thing.of;
 
@@ -111,7 +110,10 @@ final class _Thing extends Thing {
   }
 
   factory _Thing.fromJson(final Map<String, dynamic> json) {
-    return Function.apply(
-        _Thing.of, [], json.map((k, v) => MapEntry(Symbol(k), v)));
+    return Function.apply(_Thing.of, [], json.map((k, v) {
+      final key = Symbol(k);
+      final val = switch (key) { #key => Term.parse(v), _ => v };
+      return MapEntry(key, val);
+    }));
   }
 }

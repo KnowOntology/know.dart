@@ -77,12 +77,16 @@ final class _Link extends Link {
     this.id,
     this.name,
     this.url,
-  }) : key = key ?? Term.genid(), super._();
+  })  : key = key ?? Term.genid(),
+        super._();
 
   factory _Link() = _Link.of;
 
   factory _Link.fromJson(final Map<String, dynamic> json) {
-    return Function.apply(
-        _Link.of, [], json.map((k, v) => MapEntry(Symbol(k), v)));
+    return Function.apply(_Link.of, [], json.map((k, v) {
+      final key = Symbol(k);
+      final val = switch (key) { #key => Term.parse(v), _ => v };
+      return MapEntry(key, val);
+    }));
   }
 }
