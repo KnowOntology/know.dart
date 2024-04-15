@@ -1,5 +1,7 @@
 // This is free and unencumbered software released into the public domain.
 
+import 'package:knf/knf.dart' show Term;
+
 import '../prelude.dart';
 import '../inspect.dart' show inspect;
 import 'thing.dart' show Thing;
@@ -11,6 +13,7 @@ sealed class Group extends Thing {
   const Group._() : super.init();
 
   const factory Group({
+    Term? key,
     String? id,
     Name? name,
   }) = _Group.of;
@@ -44,10 +47,12 @@ sealed class Group extends Thing {
   /// Creates a new [Group] from this one by updating individual properties.
   @override
   Group copyWith({
+    Term? key,
     String? id,
     Name? name,
   }) =>
       Group(
+        key: key ?? this.key,
         id: id ?? this.id,
         name: name ?? this.name,
       );
@@ -55,12 +60,16 @@ sealed class Group extends Thing {
 
 final class _Group extends Group {
   @override
+  final Term? key;
+
+  @override
   final String? id;
 
   @override
   final Name? name;
 
   const _Group.of({
+    this.key,
     this.id,
     this.name,
   }) : super._();

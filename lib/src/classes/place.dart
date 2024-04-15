@@ -1,5 +1,7 @@
 // This is free and unencumbered software released into the public domain.
 
+import 'package:knf/knf.dart' show Term;
+
 import '../prelude.dart';
 import '../inspect.dart' show inspect;
 import 'thing.dart' show Thing;
@@ -11,6 +13,7 @@ sealed class Place extends Thing {
   const Place._() : super.init();
 
   const factory Place({
+    Term? key,
     String? id,
     Name? name,
   }) = _Place.of;
@@ -44,10 +47,12 @@ sealed class Place extends Thing {
   /// Creates a new [Place] from this one by updating individual properties.
   @override
   Place copyWith({
+    Term? key,
     String? id,
     Name? name,
   }) =>
       Place(
+        key: key ?? this.key,
         id: id ?? this.id,
         name: name ?? this.name,
       );
@@ -55,12 +60,16 @@ sealed class Place extends Thing {
 
 final class _Place extends Place {
   @override
+  final Term? key;
+
+  @override
   final String? id;
 
   @override
   final Name? name;
 
   const _Place.of({
+    this.key,
     this.id,
     this.name,
   }) : super._();

@@ -1,5 +1,7 @@
 // This is free and unencumbered software released into the public domain.
 
+import 'package:knf/knf.dart' show Term;
+
 import '../prelude.dart';
 import '../inspect.dart' show inspect;
 import 'place.dart' show Place;
@@ -19,6 +21,7 @@ sealed class Event extends Thing {
   const Event._() : super.init();
 
   const factory Event({
+    Term? key,
     String? id,
     Name? name,
     Date? start,
@@ -64,6 +67,7 @@ sealed class Event extends Thing {
   /// Creates a new [Event] from this one by updating individual properties.
   @override
   Event copyWith({
+    Term? key,
     String? id,
     Name? name,
     Date? start,
@@ -71,6 +75,7 @@ sealed class Event extends Thing {
     Place? place,
   }) =>
       Event(
+        key: key ?? this.key,
         id: id ?? this.id,
         name: name ?? this.name,
         start: start ?? this.start,
@@ -80,6 +85,9 @@ sealed class Event extends Thing {
 }
 
 final class _Event extends Event {
+  @override
+  final Term? key;
+
   @override
   final String? id;
 
@@ -96,6 +104,7 @@ final class _Event extends Event {
   final Place? place;
 
   const _Event.of({
+    this.key,
     this.id,
     this.name,
     this.start,

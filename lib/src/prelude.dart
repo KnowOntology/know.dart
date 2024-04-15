@@ -1,5 +1,7 @@
 // This is free and unencumbered software released into the public domain.
 
+export 'package:knf/knf.dart' show FactListToSet, JSONCompact, SymbolAsString;
+
 /// The length of time that a person has lived or a thing has existed.
 typedef Age = int;
 
@@ -24,39 +26,4 @@ typedef Phone = String;
 enum Sex {
   male,
   female,
-}
-
-Type typeOf<X>() => X;
-
-/// Implementation of `Map<String, dynamic>#compact()`.
-extension JSONCompact on Map<String, dynamic> {
-  Map<String, dynamic> compact() {
-    removeWhere((_, v) => v == null);
-    removeWhere((_, v) => v is List && v.isEmpty);
-    removeWhere((_, v) => v is Set && v.isEmpty);
-    removeWhere((_, v) => v is Map && v.isEmpty);
-    keys.toList().forEach((k) {
-      final v = this[k];
-      if (v is Map) {
-        this[k] = (v as Map<String, dynamic>).compact();
-      } else if (v is Set) {
-        this[k] = v
-            .map((e) => e is! Map ? e : (e as Map<String, dynamic>).compact())
-            .toList();
-      } else if (v is List) {
-        this[k] = v
-            .map((e) => e is! Map ? e : (e as Map<String, dynamic>).compact())
-            .toList();
-      }
-    });
-    return this;
-  }
-}
-
-/// Implementation of `Symbol#asString()`.
-extension SymbolAsString on Symbol {
-  String asString() {
-    final s = toString();
-    return s.substring("Symbol(\"".length, s.length - "\")".length);
-  }
 }

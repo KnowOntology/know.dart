@@ -1,5 +1,7 @@
 // This is free and unencumbered software released into the public domain.
 
+import 'package:knf/knf.dart' show Term;
+
 import '../prelude.dart';
 import '../inspect.dart' show inspect;
 import 'thing.dart' show Thing;
@@ -11,7 +13,7 @@ sealed class File extends Thing {
 
   const File._() : super.init();
 
-  const factory File({String? id, Name? name, int? size}) = _File.of;
+  const factory File({Term? key, String? id, Name? name, int? size}) = _File.of;
 
   factory File.fromJson(final Map<String, dynamic> json) = _File.fromJson;
 
@@ -44,11 +46,13 @@ sealed class File extends Thing {
   /// Creates a new [File] from this one by updating individual properties.
   @override
   File copyWith({
+    Term? key,
     String? id,
     Name? name,
     int? size,
   }) =>
       File(
+        key: key ?? this.key,
         id: id ?? this.id,
         name: name ?? this.name,
         size: size ?? this.size,
@@ -56,6 +60,9 @@ sealed class File extends Thing {
 }
 
 final class _File extends File {
+  @override
+  final Term? key;
+
   @override
   final String? id;
 
@@ -66,6 +73,7 @@ final class _File extends File {
   final int? size;
 
   const _File.of({
+    this.key,
     this.id,
     this.name,
     this.size,

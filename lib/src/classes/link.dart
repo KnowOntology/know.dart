@@ -1,5 +1,7 @@
 // This is free and unencumbered software released into the public domain.
 
+import 'package:knf/knf.dart' show Term;
+
 import '../prelude.dart';
 import '../inspect.dart' show inspect;
 import 'thing.dart' show Thing;
@@ -11,7 +13,7 @@ sealed class Link extends Thing {
 
   const Link._() : super.init();
 
-  const factory Link({String? id, Name? name, IRI? url}) = _Link.of;
+  const factory Link({Term? key, String? id, Name? name, IRI? url}) = _Link.of;
 
   factory Link.fromJson(final Map<String, dynamic> json) = _Link.fromJson;
 
@@ -44,11 +46,13 @@ sealed class Link extends Thing {
   /// Creates a new [Link] from this one by updating individual properties.
   @override
   Link copyWith({
+    Term? key,
     String? id,
     Name? name,
     IRI? url,
   }) =>
       Link(
+        key: key ?? this.key,
         id: id ?? this.id,
         name: name ?? this.name,
         url: url ?? this.url,
@@ -56,6 +60,9 @@ sealed class Link extends Thing {
 }
 
 final class _Link extends Link {
+  @override
+  final Term? key;
+
   @override
   final String? id;
 
@@ -66,6 +73,7 @@ final class _Link extends Link {
   final IRI? url;
 
   const _Link.of({
+    this.key,
     this.id,
     this.name,
     this.url,

@@ -1,6 +1,7 @@
 // This is free and unencumbered software released into the public domain.
 
 import 'package:collection/collection.dart';
+import 'package:knf/knf.dart' show Fact, Property, Term;
 
 import '../prelude.dart';
 import '../inspect.dart' show inspect;
@@ -238,7 +239,8 @@ sealed class Person extends Thing {
 
   const Person._() : super.init();
 
-  const factory Person({
+  factory Person({
+    Term? key,
     String? id,
     Name? name,
     String? honorific,
@@ -262,6 +264,8 @@ sealed class Person extends Thing {
     Set<IRI> links,
     Set<String> notes,
   }) = _Person.of;
+
+  factory Person.fromFacts(final Iterable<Fact> facts) = _Person.fromFacts;
 
   factory Person.fromJson(final Map<String, dynamic> json) = _Person.fromJson;
 
@@ -368,6 +372,13 @@ sealed class Person extends Thing {
   String toString() => inspect("Person", toJson());
 
   @override
+  Set<Fact> toFacts() => super.toFacts()..addAll(<Fact?>[
+        key != null && id != null ? Fact.spo(key!, #id, id!) : null,
+        key != null && name != null ? Fact.spo(key!, #name, name!) : null,
+        // TODO
+      ].toFacts());
+
+  @override
   Map<String, dynamic> toJson() => super.toJson()
     ..addAll(<String, dynamic>{
       "honorific": honorific,
@@ -396,6 +407,7 @@ sealed class Person extends Thing {
   /// Creates a new [Person] from this one by updating individual properties.
   @override
   Person copyWith({
+    Term? key,
     String? id,
     Name? name,
     String? honorific,
@@ -420,6 +432,7 @@ sealed class Person extends Thing {
     Set<String>? notes,
   }) =>
       Person(
+        key: key ?? this.key,
         id: id ?? this.id,
         name: name ?? this.name,
         honorific: honorific ?? this.honorific,
@@ -446,6 +459,9 @@ sealed class Person extends Thing {
 }
 
 final class _Person extends Person {
+  @override
+  final Term? key;
+
   @override
   final String? id;
 
@@ -542,8 +558,9 @@ final class _Person extends Person {
   @override
   final Set<String> notes;
 
-  const _Person.of(
-      {this.id,
+  _Person.of(
+      {this.key,
+      this.id,
       this.name,
       this.honorific,
       this.aliases = const {},
@@ -567,7 +584,47 @@ final class _Person extends Person {
       this.notes = const {}})
       : super._();
 
-  const factory _Person() = _Person.of;
+  factory _Person() = _Person.of;
+
+  factory _Person.fromFacts(final Iterable<Fact> facts) {
+    final Map<Symbol, dynamic> props = {};
+    Set<T> add<T>(final Symbol id, final T value) {
+      final values = props[id] ?? <T>{};
+      values.add(value);
+      return values;
+    }
+
+    for (final fact in facts.where((f) => f.predicate.isProperty)) {
+      final predicate = fact.predicate as Property;
+      final object = fact.object;
+      final _ = switch (predicate.id) {
+        #id => props[#id] = object.valueAsString,
+        #name => props[#name] = object.valueAsString,
+        #honorific => props[#honorific] = object.valueAsString,
+        #alias => add(#aliases, object.valueAsString),
+        #photo => props[#photo] = object.valueAsString,
+        // TODO: #sex,
+        // TODO: #birth,
+        // TODO: #death,
+        // TODO: #father,
+        // TODO: #mother,
+        // TODO: #siblings = const {},
+        // TODO: #partners = const {},
+        // TODO: #spouses = const {},
+        // TODO: #children = const {},
+        // TODO: #colleagues = const {},
+        // TODO: #knows = const {},
+        // TODO: #speaks = const {},
+        // TODO: #nationalities = const {},
+        // TODO: #emails = const {},
+        // TODO: #phones = const {},
+        // TODO: #links = const {},
+        // TODO: #notes = const {}})
+        _ => {},
+      };
+    }
+    return Function.apply(_Person.of, [], props);
+  }
 
   factory _Person.fromJson(final Map<String, dynamic> json) {
     return Function.apply(_Person.of, [], json.map((k, v) {
