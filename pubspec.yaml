@@ -4,9 +4,9 @@ name: know
 version: 0.0.11
 description: The Know Framework for Dart
 homepage: https://know.dev
-repository: https://github.com/HaltiaAI/know.dart
-issue_tracker: https://github.com/HaltiaAI/know.dart/issues
-documentation: https://github.com/HaltiaAI/know.dart/blob/master/README.md
+repository: https://github.com/KnowOntology/know.dart
+issue_tracker: https://github.com/KnowOntology/know.dart/issues
+documentation: https://github.com/KnowOntology/know.dart/blob/master/README.md
 environment:
   sdk: '>=3.0.0 <4.0.0'
 dependencies:
